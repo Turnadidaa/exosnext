@@ -36,7 +36,7 @@ class MenuManager:
         
 if __name__ == "__main__":
     manager = MenuManager()
-    manager.add_item("Pizza", 12, "B", True)
-    manager.update_item("salad", 20, "C", False)
+    manager.add_item("couscous", 12, "B", True)
+    manager.update_item("rfissa", 20, "C", False)
     manager.remove_item("soupe")
     manager.remove_item("Hamburger")
