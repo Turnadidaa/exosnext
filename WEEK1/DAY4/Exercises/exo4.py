@@ -72,3 +72,61 @@ nounous= Dog("nounous", 3, 15)
 print(rex.bark())       
 print(rex.fight(teacup))
 
+# exo 4 : family 
+
+class Family:
+    def __init__(self, last_name, members=None):
+        self.last_name = last_name
+        self.members = members if members is not None else []
+
+    def born(self, **kwargs):
+        self.members.append(kwargs)
+        print(f"Congratulations to the {self.last_name} family on the birth of {kwargs.get('name')}!")
+
+    def is_18(self, name):
+        for member in self.members:
+            if member.get("name") == name:
+                return member.get("age", 0) >= 18
+        return False
+
+    def family_presentation(self):
+        print(f"Family Name: {self.last_name}")
+        for member in self.members:
+            print(member)
+
+family = Family("Johnson", [
+    {'name': 'Michael', 'age': 35, 'gender': 'Male', 'is_child': False},
+    {'name': 'Sarah', 'age': 32, 'gender': 'Female', 'is_child': False}
+])
+
+family.family_presentation()
+print(family.is_18("Michael"))
+print(family.is_18("Sarah"))
+family.born(name="Emma", age=0, gender="Female", is_child=True)
+family.family_presentation()
+
+# exo5 TheIncredibles Family
+
+
+class TheIncredibles(Family):
+    def use_power(self, name):
+        for member in self.members:
+            if member.get("name") == name:
+                if member.get("age", 0) >= 18:
+                    print(f"{member['incredible_name']} uses their power: {member['power']}")
+                else:
+                    raise Exception(f"{member['name']} is not over 18 years old and cannot use their power.")
+                return
+        print(f"No member named {name} found.")
+
+    def incredible_presentation(self):
+        print("\n Here is our powerful family ")
+        super().family_presentation()
+        
+incredible_family = TheIncredibles("Incredibles", [
+    {'name': 'Michael', 'age': 35, 'gender': 'Male', 'is_child': False, 'power': 'fly', 'incredible_name': 'MikeFly'},
+    {'name': 'Sarah', 'age': 32, 'gender': 'Female', 'is_child': False, 'power': 'read minds', 'incredible_name': 'SuperWoman'}
+])
+incredible_family.incredible_presentation()
+incredible_family.born(name="Jack", age=0, gender="Male", is_child=True, power="Unknown Power", incredible_name="Baby Jack")
+incredible_family.incredible_presentation()
