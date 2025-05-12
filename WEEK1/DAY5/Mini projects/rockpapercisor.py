@@ -1,55 +1,62 @@
+import tkinter as tk
 from game import Game
 
-def get_user_menu_choice():
-    # Display menu and get user choice
-    print("\nMenu:")
-    print("1. Play a new game 🎮")
-    print("2. Show scores 📊")
-    print("3. Quit ❌")
-    
-    while True:
-        choice = input("Enter your choice (1/2/3): ")
-        if choice in ["1", "2", "3"]:
-            return choice
+class GameApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Rock, Paper, Scissors Game 🎮")
+        self.game = Game()
+
+        # Interface components
+        self.result_label = tk.Label(root, text="Choose Rock ✊, Paper 🧻 or Scissors ✂️", font=("Helvetica", 16))
+        self.result_label.pack()
+
+        # Create buttons for user choices
+        self.rock_button = tk.Button(root, text="Rock ✊", width=20, command=lambda: self.play_game("rock"))
+        self.rock_button.pack(pady=10)
+
+        self.paper_button = tk.Button(root, text="Paper 🧻", width=20, command=lambda: self.play_game("paper"))
+        self.paper_button.pack(pady=10)
+
+        self.scissors_button = tk.Button(root, text="Scissors ✂️", width=20, command=lambda: self.play_game("scissors"))
+        self.scissors_button.pack(pady=10)
+
+        # Result display
+        self.game_result_label = tk.Label(root, text="", font=("Helvetica", 14))
+        self.game_result_label.pack(pady=10)
+
+        # Score display
+        self.score_label = tk.Label(root, text="Wins: 0 | Losses: 0 | Draws: 0", font=("Helvetica", 14))
+        self.score_label.pack()
+
+        self.score = {"win": 0, "loss": 0, "draw": 0}
+
+    def play_game(self, user_choice):
+        user_item, computer_item, result = self.game.play(user_choice)
+
+        if result == "Invalid choice":
+            self.game_result_label.config(text="❌ Invalid choice. Please try again.")
         else:
-            print("❌ Invalid choice. Please enter 1, 2, or 3.")
+            self.game_result_label.config(
+                text=f"You chose {user_item}. The computer chose {computer_item}.\n"
+                     f"Result: {result.capitalize()}!"
+            )
 
-def print_results(results):
-    # Print the results of the games played
-    print("\nGame Summary:")
-    print(f"🏆 Wins: {results['win']}")
-    print(f"💔 Losses: {results['loss']}")
-    print(f"🤝 Draws: {results['draw']}")
-    print("Thank you for playing! ✌️")
-
-def main():
-    results = {"win": 0, "loss": 0, "draw": 0}
-    
-    while True:
-        choice = get_user_menu_choice()
-        
-        if choice == "1":
-            # Play a new game
-            game = Game()
-            result = game.play()
-            
-            # Update the results based on the game outcome
+            # Update scores
             if result == "win":
-                results["win"] += 1
+                self.score["win"] += 1
             elif result == "loss":
-                results["loss"] += 1
+                self.score["loss"] += 1
             else:
-                results["draw"] += 1
-        
-        elif choice == "2":
-            # Show the scores
-            print_results(results)
-        
-        elif choice == "3":
-            # Quit the program
-            print_results(results)
-            print("Goodbye! 👋")
-            break
+                self.score["draw"] += 1
+
+            # Update score label
+            self.score_label.config(
+                text=f"Wins: {self.score['win']} | Losses: {self.score['loss']} | Draws: {self.score['draw']}"
+            )
+
 
 if __name__ == "__main__":
-    main()
+    root = tk.Tk()
+    app = GameApp(root)
+    root.mainloop()
