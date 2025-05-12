@@ -34,4 +34,54 @@ while True:
 
 # exo4 : check the index 
 
-names = ['Samus', 'Cortana', 'V', 'link', 'Mario', 'Cortana', 'Samus']
+names = ['Samus', 'Cortana', 'V', 'Link', 'Mario', 'Cortana', 'Samus']
+
+user_name = input("Enter your name: ")
+
+if user_name in names:
+    index = names.index(user_name)
+    print(f"{user_name} found at index {index}.")
+else:
+    print(f"{user_name} not found in the list.")
+
+# exo5 :
+num1 = int(input("Input the 1st number: "))
+num2 = int(input("Input the 2nd number: "))
+num3 = int(input("Input the 3rd number: "))
+
+# Find the maximum number
+max_num = max(num1, num2, num3)
+print(f"The maximum number is: {max_num}")
+
+# exo 6 :
+
+import random
+
+wins = 0
+losses = 0
+
+while True:
+    try:
+        user_input = input("Guess a number between 1 and 9 (or type 'q' to quit): ")
+        if user_input.lower() == 'q':
+            break
+        
+        guess = int(user_input)
+        if guess < 1 or guess > 9:
+            print("Please enter a number between 1 and 9.")
+            continue
+
+        random_number = random.randint(1, 9)
+        print(f"The random number was: {random_number}")
+
+        if guess == random_number:
+            print("Winner!")
+            wins += 1
+        else:
+            print("Better luck next time.")
+            losses += 1
+
+    except ValueError:
+        print("Invalid input. Please enter a number between 1 and 9 or 'q' to quit.")
+
+print(f"\nGame Over. You won {wins} time(s) and lost {losses} time(s).")
