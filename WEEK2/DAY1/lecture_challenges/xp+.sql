@@ -12,6 +12,9 @@
 --     ('Amelia', 'Dux', '1996-04-07'),
 --     ('David', 'Grez', '2003-06-14'),
 --     ('Omer', 'Simpson', '1980-10-03');
+-- INSERT INTO students (first_name, last_name, birth_date)
+-- VALUES ('Nada', 'Mouni', '1996-06-03');
+
 -- SELECT * FROM students;
 -- SELECT first_name, last_name FROM students;
 -- SELECT first_name, last_name FROM students WHERE id = 2
@@ -38,5 +41,5 @@
 -- ORDER BY id
 -- LIMIT 3 OFFSET 2;
 
-
+-- SELECT* FROM STUDENTS
 
