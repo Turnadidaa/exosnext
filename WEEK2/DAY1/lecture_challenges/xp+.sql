@@ -1,4 +1,4 @@
--- CREATE TABLE students (
+--  CREATE TABLE students (
 --     id SERIAL PRIMARY KEY,
 --     last_name VARCHAR(50),
 --     first_name VARCHAR(50),
