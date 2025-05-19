@@ -1,0 +1,73 @@
+-- -- 1. Créer la table des commandes
+-- CREATE TABLE product_orders (
+--     id SERIAL PRIMARY KEY,
+--     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
+-- -- 2. Créer la table des items, liée à une commande (relation one-to-many)
+-- CREATE TABLE items (
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(100) NOT NULL,
+--     price NUMERIC(10, 2) NOT NULL,
+--     order_id INTEGER REFERENCES product_orders(id)
+-- );
+
+-- -- 3. Fonction : retourner le prix total d'une commande
+-- CREATE OR REPLACE FUNCTION get_order_total(order_id_input INTEGER)
+-- RETURNS NUMERIC AS $$
+-- DECLARE
+--     total NUMERIC;
+-- BEGIN
+--     SELECT SUM(price)
+--     INTO total
+--     FROM items
+--     WHERE order_id = order_id_input;
+
+--     RETURN COALESCE(total, 0);
+-- END;
+-- $$ LANGUAGE plpgsql;
+
+-- -- BONUS : Ajouter la table des utilisateurs
+-- CREATE TABLE users (
+--     id SERIAL PRIMARY KEY,
+--     username VARCHAR(100) NOT NULL
+-- );
+
+-- -- Relier la table des commandes à un utilisateur
+-- ALTER TABLE product_orders
+-- ADD COLUMN user_id INTEGER REFERENCES users(id);
+
+-- -- Fonction : retourner le total d'une commande pour un utilisateur donné
+-- CREATE OR REPLACE FUNCTION get_user_order_total(user_id_input INTEGER, order_id_input INTEGER)
+-- RETURNS NUMERIC AS $$
+-- DECLARE
+--     total NUMERIC;
+-- BEGIN
+--     SELECT SUM(i.price)
+--     INTO total
+--     FROM items i
+--     JOIN product_orders o ON i.order_id = o.id
+--     WHERE o.id = order_id_input AND o.user_id = user_id_input;
+
+--     RETURN COALESCE(total, 0);
+-- END;
+-- $$ LANGUAGE plpgsql;
+
+-- -- EXEMPLE DE TEST
+
+-- -- Insérer un utilisateur
+-- INSERT INTO users (username) VALUES ('nada');
+
+-- -- Insérer une commande pour cet utilisateur
+-- INSERT INTO product_orders (user_id) VALUES (1);
+
+-- -- Insérer des items liés à la commande
+-- INSERT INTO items (name, price, order_id)
+-- VALUES 
+-- ('Stylo', 2.50, 1),
+-- ('Cahier', 3.00, 1),
+-- ('Crayon', 1.20, 1);
+
+-- -- Tester les fonctions
+-- SELECT get_order_total(1);           -- Résultat attendu : 6.70
+-- SELECT get_user_order_total(1, 1);   -- Résultat attendu : 6.70

@@ -1,0 +1,36 @@
+-- -- 1. Récupérer tous les films G ou PG qui ne sont pas actuellement loués
+-- SELECT f.film_id, f.title, f.rating
+-- FROM film f
+-- WHERE f.rating IN ('G', 'PG')
+--   AND f.film_id NOT IN (
+--     SELECT i.film_id
+--     FROM inventory i
+--     JOIN rental r ON i.inventory_id = r.inventory_id
+--     WHERE r.return_date IS NULL
+--   );
+
+-- -- 2. Créer une table pour la file d'attente des films pour enfants
+-- CREATE TABLE waiting_list (
+--     id SERIAL PRIMARY KEY,
+--     child_name VARCHAR(100) NOT NULL,
+--     film_id INTEGER REFERENCES film(film_id),
+--     request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
+-- -- 3. Ajouter quelques enfants dans la file d'attente pour tester
+-- -- Remplace les film_id par des IDs valides existants dans ta base
+-- INSERT INTO waiting_list (child_name, film_id)
+-- VALUES 
+-- ('Alice', 10),
+-- ('Bob', 10),
+-- ('Charlie', 12),
+-- ('Dana', 10),
+-- ('Eli', 12);
+
+-- -- 4. Nombre de personnes en attente pour chaque film G ou PG
+-- SELECT f.title, COUNT(w.id) AS number_waiting
+-- FROM waiting_list w
+-- JOIN film f ON w.film_id = f.film_id
+-- WHERE f.rating IN ('G', 'PG')
+-- GROUP BY f.title
+-- ORDER BY number_waiting DESC;
