@@ -10,5 +10,6 @@
             "username": "postgres",
             "password": "1948"
         }
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }
