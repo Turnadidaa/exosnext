@@ -1,0 +1,64 @@
+<!-- exo1 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Divisible by 3 Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fef6ff;
+      color: #5c2a9d;
+      text-align: center;
+      padding: 40px;
+    }
+    button {
+      background-color: #d291ff;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #b266ff;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    li {
+      margin: 8px 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💜 Divisible by 3 Checker 💜</h1>
+  <button onclick="checkDivisibility()">Check Numbers</button>
+
+  <ul id="resultList"></ul>
+
+  <script>
+    function checkDivisibility() {
+      const numbers = [123, 8409, 100053, 333333333, 7];
+      const resultList = document.getElementById('resultList');
+      resultList.innerHTML = ''; // clear previous results
+
+      for (let i = 0; i < numbers.length; i++) {
+        const isDivisible = numbers[i] % 3 === 0;
+        const listItem = document.createElement('li');
+        listItem.textContent = `${numbers[i]} divisible by 3? ➜ ${isDivisible}`;
+        resultList.appendChild(listItem);
+      }
+    }
+  </script>
+
+</body>
+</html>
