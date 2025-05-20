@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Playing with Numbers</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #eaf4ff;
+      color: #336699;
+      text-align: center;
+      padding: 40px;
+    }
+
+    button {
+      background-color: #66b3ff;
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #3399ff;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔢 Playing with Numbers 🔢</h1>
+  <button onclick="calculateSum()">Show Sum of Ages</button>
+  <button onclick="findHighestAge()">Show Highest Age</button>
+
+  <p id="result"></p>
+
+  <script>
+    let age = [20, 5, 12, 43, 98, 55];
+
+    function calculateSum() {
+      let sum = 0;
+      for (let i = 0; i < age.length; i++) {
+        sum += age[i];
+      }
+      document.getElementById("result").textContent = `The sum of all ages is: ${sum}`;
+    }
+
+    function findHighestAge() {
+      let highest = age[0]; // start with the first age
+      for (let i = 1; i < age.length; i++) {
+        if (age[i] > highest) {
+          highest = age[i];
+        }
+      }
+      document.getElementById("result").textContent = `The highest age is: ${highest}`;
+    }
+  </script>
+
+</body>
+</html>

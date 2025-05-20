@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attendance Checker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      color: #a64d79;
+      text-align: center;
+      padding: 50px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 10px;
+      border: 2px solid #ff99cc;
+    }
+
+    button {
+      background-color: #ffb6c1;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff69b4;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌸 Attendance Checker 🌸</h1>
+  <input type="text" id="studentName" placeholder="Enter your name..." />
+  <button onclick="checkAttendance()">Check</button>
+
+  <p id="result"></p>
+
+  <script>
+    const guestList = {
+      randy: "Germany",
+      karla: "France",
+      wendy: "Japan",
+      norman: "England",
+      sam: "Argentina"
+    };
+
+    function checkAttendance() {
+      const nameInput = document.getElementById("studentName").value.trim().toLowerCase();
+      const result = document.getElementById("result");
+
+      if (nameInput in guestList) {
+        const country = guestList[nameInput];
+        result.textContent = `Hi! I'm ${nameInput.charAt(0).toUpperCase() + nameInput.slice(1)}, and I'm from ${country}.`;
+      } else {
+        result.textContent = "Hi! I'm a guest.";
+      }
+    }
+  </script>
+
+</body>
+</html>
