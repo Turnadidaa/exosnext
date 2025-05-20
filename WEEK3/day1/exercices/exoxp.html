@@ -1,0 +1,259 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h1>exercice xp</h1>
+    <h2>remove Greg</h2>
+<script>
+    const people = ["Greg", "Mary", "Devon", "James"];
+    console.log(people);
+    // 1. Remove "Greg" from the people array.
+    people.shift();
+    console.log(people);
+</script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>exoxp2</h1>
+    <h2>replace james to jason</h2>
+    <script>
+        const people = ["Greg", "Mary", "Devon", "James"];
+        console.log(people);
+        // 1. Replace "James" with "Jason"
+        const index = people.indexOf("James");
+        if (index !== -1) {
+            people[index] = "Jason";
+        }
+        console.log(people);
+    </script>
+</body>
+</html> -->
+
+<!-- 
+// add my name to the end of the array -->
+<!-- <script>
+
+const people = ["Greg", "Mary", "Devon", "Jason"];
+console.log(people);    
+// 1. Add "nada" to the end of the array
+people.push("nada");
+console.log(people);    
+</script> -->
+
+<!-- 4 -->
+<!-- <script>
+
+const people = ["Greg", "Mary", "Devon", "Jason"];
+console.log(people);
+
+// console.log Mary's index
+const index = people.indexOf("Mary");
+console.log(index); 
+
+</script> -->
+
+<!-- <script>
+
+const people = ["Mary", "Devon", "Jason", "Nada"]
+const copy = people.slice(1, 3); 
+console.log(copy); 
+</script> -->
+
+<!-- 6 -->
+<!-- <script>
+const people = ["Mary", "Devon", "Jason", "Nada"]
+console.log(people.indexOf("Foo"));
+// 1. Check if "Foo" is in the array
+if (people.indexOf("Foo") === -1) {
+    console.log("not found");
+} else {
+    console.log("found");
+}
+</script> -->
+
+<!-- 7 -->
+
+<!-- <script>
+const people = ["Mary", "Devon", "Jason", "Nada"]
+const last = people[people.length - 1]; 
+console.log(last); 
+</script> -->
+
+
+<!-- partie 2 -->
+
+
+<!-- <script>
+
+const people = ["Mary", "Devon", "Jason", "Nada"];
+console.log(people);
+for (let i = 0; i < people.length; i++) {
+    console.log(people[i]);
+}
+</script> -->
+
+
+<!-- partie2.2 -->
+ <!-- <script>
+const people = ["Mary", "Devon", "Jason", "Nada"];
+console.log(people);
+    for (let i = 0; i < people.length; i++) {
+    console.log(people[i]);
+    if (people[i] === "Devon") {
+        break; // On arrête ici
+    }
+}
+ </script> -->
+
+
+ <!-- exo2 -->
+<!-- 
+ <script>
+const colors = ["red", "blue", "green", "yellow"];
+console.log(colors);
+
+for (let i = 0; i < colors.length; i++) {
+    console.log(`My #${i + 1} choice is ${colors[i]}`);
+}   
+</script> -->
+
+<!-- bonus -->
+ <!-- <script>
+const colors = ["blue", "red", "green", "purple", "orange"];
+const suffixes = ["st", "nd", "rd", "th", "th"]; // pour les 5 premières positions
+
+for (let i = 0; i < colors.length; i++) {
+    const rank = i + 1;
+    const suffix = suffixes[i] || "th"; // Par défaut "th" si plus de 5
+    console.log(`My ${rank}${suffix} choice is ${colors[i]}`);
+}
+
+ </script> -->
+
+ <!-- exo3  -->
+
+<!-- <script>
+let input = prompt("Please enter a number:");
+let number = Number(input);
+
+console.log("You entered:", number);
+console.log("Type after conversion:", typeof number);
+
+// Tant que le nombre est inférieur à 10, on redemande
+while (number < 10) {
+    input = prompt("Number is too small. Please enter a number greater than or equal to 10:");
+    number = Number(input);
+    console.log("You entered:", number);
+}
+</script> -->
+
+<!-- exo4 -->
+<!-- 
+<script>
+const building = {
+    numberOfFloors: 4,
+    numberOfAptByFloor: {
+        firstFloor: 3,
+        secondFloor: 4,
+        thirdFloor: 9,
+        fourthFloor: 2,
+    },
+    nameOfTenants: ["Sarah", "Dan", "David"],
+    numberOfRoomsAndRent:  {
+        sarah: [3, 990],
+        dan:  [4, 1000],
+        david: [1, 500],
+    },
+}
+console.log("Number of floors:", building.numberOfFloors); 
+const floor1 = building.numberOfAptByFloor.firstFloor;
+const floor3 = building.numberOfAptByFloor.thirdFloor;
+console.log("Apartments on floor 1 and 3:", floor1, floor3); 
+
+const secondTenant = building.nameOfTenants[1]; 
+const rooms = building.numberOfRoomsAndRent.dan[0]; 
+console.log(`${secondTenant} has ${rooms} rooms.`); 
+
+const rentSarah = building.numberOfRoomsAndRent.sarah[1]; // 990
+const rentDavid = building.numberOfRoomsAndRent.david[1]; // 500
+const rentDan = building.numberOfRoomsAndRent.dan[1]; // 1000
+
+if (rentSarah + rentDavid > rentDan) {
+    building.numberOfRoomsAndRent.dan[1] = 1200;
+    console.log("Dan’s rent increased to 1200.");
+} else {
+    console.log("No change to Dan’s rent.");
+}
+
+</script> -->
+
+<!-- exo5 -->
+ <!-- <script>
+// 1. Créer l'objet family avec quelques paires clé-valeur
+const family = {
+  father: "John",
+  mother: "Jane",
+  son: "Mike",
+  daughter: "Emma"
+};
+
+// 2. Afficher les clés avec une boucle for...in
+console.log("Keys:");
+for (let key in family) {
+  console.log(key);
+}
+
+// 3. Afficher les valeurs avec une boucle for...in
+console.log("Values:");
+for (let key in family) {
+  console.log(family[key]);
+}
+</script> -->
+
+<!-- exo6 -->
+<!-- 
+<script>
+
+const details = {
+  my: 'name',
+  is: 'Rudolf',
+  the: 'reindeer'
+}
+// Given the object above and using a for loop, console.log “my name is Rudolf the reindeer”
+
+let sentence = '';
+
+for (let key in details) {
+  sentence += key + ' ' + details[key] + ' ';
+}
+
+console.log(sentence.trim()); // "my name is Rudolf the reindeer"
+
+</script> -->
+
+<!-- 
+exo7  
+<script>
+    const names = ["Jack", "Philip", "Sarah", "Amanda", "Bernard", "Kyle"];
+
+    const secretName = names
+      .map(name => name[0])
+      .sort()
+      .join('');
+
+    console.log(secretName);
+
+</script>
