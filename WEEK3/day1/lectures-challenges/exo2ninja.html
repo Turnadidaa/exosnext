@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grade Average Checker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f0ff;
+      color: #5a3d85;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #a94bd1;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 16px;
+      background-color: #c27cff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a45be3;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 Grade Average Checker 📚</h1>
+  <p>We'll check if you passed based on your grades!</p>
+
+  <button onclick="checkGrades()">Check My Average</button>
+
+  <p id="output"></p>
+
+  <script>
+    // 1. Function that calculates the average
+    function findAvg(gradesList) {
+      let sum = 0;
+      for (let i = 0; i < gradesList.length; i++) {
+        sum += gradesList[i];
+      }
+      let average = sum / gradesList.length;
+      return average;
+    }
+
+    // 2. Function that checks if the user passed or failed
+    function checkGrades() {
+      let grades = [78, 85, 62, 90, 59]; // Example grades
+      let avg = findAvg(grades);
+      let message = `Your average is ${avg.toFixed(2)}. `;
+
+      if (avg > 65) {
+        message += "🎉 You passed!";
+      } else {
+        message += "❌ You failed and must repeat the course.";
+      }
+
+      document.getElementById("output").textContent = message;
+    }
+  </script>
+
+</body>
+</html>

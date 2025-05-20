@@ -1,0 +1,120 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI Morphology Checker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff5fb;
+      color: #5e3370;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #cc3399;
+    }
+
+    .person-box {
+      background-color: #fce4ec;
+      border: 2px dashed #cc66a0;
+      border-radius: 15px;
+      display: inline-block;
+      width: 250px;
+      margin: 10px;
+      padding: 20px;
+    }
+
+    .person-box h2 {
+      margin-bottom: 10px;
+      color: #a64d79;
+    }
+
+    .result {
+      font-size: 18px;
+      margin-top: 30px;
+      color: #993366;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #e75480;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #d3366f;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💗 Morphology BMI Checker 💗</h1>
+
+  <div class="person-box" id="person1">
+    <h2>John</h2>
+    <p>Mass: 70 kg</p>
+    <p>Height: 1.75 m</p>
+    <p id="bmi1"></p>
+  </div>
+
+  <div class="person-box" id="person2">
+    <h2>Jane</h2>
+    <p>Mass: 60 kg</p>
+    <p>Height: 1.65 m</p>
+    <p id="bmi2"></p>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <button onclick="checkBMI()">Check BMI</button>
+
+  <script>
+    const person = {
+      name: "John",
+      mass: 70,
+      height: 1.75,
+      calculateBMI: function() {
+        return this.mass / (this.height * this.height);
+      }
+    };
+
+    const person2 = {
+      name: "Jane",
+      mass: 60,
+      height: 1.65,
+      calculateBMI: function() {
+        return this.mass / (this.height * this.height);
+      }
+    };
+
+    function checkBMI() {
+      const bmi1 = person.calculateBMI().toFixed(2);
+      const bmi2 = person2.calculateBMI().toFixed(2);
+
+      document.getElementById("bmi1").textContent = `BMI: ${bmi1}`;
+      document.getElementById("bmi2").textContent = `BMI: ${bmi2}`;
+
+      let message = '';
+      if (bmi1 > bmi2) {
+        message = `${person.name} has a higher BMI than ${person2.name}.`;
+      } else if (bmi1 < bmi2) {
+        message = `${person2.name} has a higher BMI than ${person.name}.`;
+      } else {
+        message = `${person.name} and ${person2.name} have the same BMI.`;
+      }
+
+      document.getElementById("result").textContent = message;
+    }
+  </script>
+
+</body>
+</html> -->
