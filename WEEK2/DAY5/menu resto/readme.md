@@ -1,41 +1,41 @@
 # 🍃 HealthyBar Menu Manager
 
-## 🥗 Qu'est-ce que ce projet ?
+## 🥗 What is this project?
 
-**HealthyBar Menu Manager** est une application web basée sur Flask (Python) et PostgreSQL, conçue pour gérer facilement le menu d’un bar à salades ou restaurant healthy.
+**HealthyBar Menu Manager** is a web application built with Flask (Python) and PostgreSQL, designed to simplify the management of menu items for a healthy food bar or salad restaurant.
 
-### 🎯 Problème résolu
+### 🎯 Problem it solves
 
-La gestion manuelle des menus (plats, prix, descriptions, images) est chronophage et sujette à erreurs. Ce projet propose une solution centralisée pour administrer les items du menu, avec une API prête à être utilisée côté frontend.
+Manually managing menus (dishes, prices, descriptions, images) is time-consuming and error-prone. This project offers a centralized and secure solution to manage the menu, with a backend API ready for frontend integration.
 
-### ✨ Fonctionnalités
+### ✨ Features
 
-- 🔐 Système de connexion avec gestion des utilisateurs et demandes d’inscription
-- 📋 Ajout, modification et suppression de plats avec image, description et catégorie
-- 📦 Base de données PostgreSQL pour stocker les menus
-- 🖼️ Upload sécurisé d’images de plats
-- 🧑‍💼 Interface d’administration pour gérer les comptes utilisateurs
+- 🔐 User authentication with registration requests and admin approval
+- 📋 Add, update, and delete dishes with image, category, and description
+- 🗃️ PostgreSQL database for reliable storage
+- 🖼️ Secure photo upload for menu items
+- 🧑‍💼 Admin dashboard to manage users and requests
 
 ---
 
-## 🚀 Comment exécuter ce projet sur un autre ordinateur
+## 🚀 How to run this project on another computer
 
-### ✅ Prérequis
+### ✅ Requirements
 
 - Python 3.10+
-- PostgreSQL installé localement
-- `pip` pour installer les dépendances Python
+- PostgreSQL installed locally
+- `pip` for installing Python packages
 
-### 🛠️ Étapes d'installation
+### 🛠️ Setup steps
 
-1. **Cloner le projet**
+1. **Clone the repository**
 
 ```bash
-git clone <URL_DU_REPO>
+git clone <REPO_URL>
 cd healthybar-hackathon
-Créer la base de données PostgreSQL
+Create the PostgreSQL database
 
-Lance PostgreSQL et exécute :
+Launch PostgreSQL and run:
 
 sql
 Copier
@@ -70,37 +70,37 @@ CREATE TABLE "account_requests" (
     status VARCHAR(20) DEFAULT 'pending',
     decision_at TIMESTAMP
 );
-Installer les dépendances
+Install dependencies
 
-Crée un environnement virtuel et installe Flask et psycopg2 :
+Create a virtual environment and install Flask and psycopg2:
 
 bash
 Copier
 Modifier
 python -m venv venv
-source venv/bin/activate  # Windows : venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install flask psycopg2
-Lancer l'application
+Run the application
 
 bash
 Copier
 Modifier
 python app.py
-L'application est disponible sur http://localhost:5000
+Visit http://localhost:5000 to use the app.
 
-📁 Structure du projet
-graphql
+📁 Project Structure
+bash
 Copier
 Modifier
 healthybar-hackathon/
-├── app.py               # Application Flask
-├── menu_item.py         # Classe MenuItem pour chaque plat
-├── menu_manager.py      # Classe MenuManager pour gérer les plats
-├── static/uploads/      # Dossier d’upload des images
-└── README.md            # Documentation du projet
-💡 À venir
-Intégration React pour une interface moderne
+├── app.py               # Main Flask application
+├── menu_item.py         # MenuItem class for single dishes
+├── menu_manager.py      # MenuManager class for listing/querying items
+├── static/uploads/      # Folder for uploaded images
+└── README.md            # Project documentation
+💡 Coming Soon
+React frontend integration
 
-Filtres nutritionnels et moteur de recherche
+Nutritional filters and search system
 
-Système de points et fidélité client
+Loyalty and points system for customers
