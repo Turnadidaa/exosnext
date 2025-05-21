@@ -1,0 +1,736 @@
+<!-- 
+
+// // Basic version (divisor fixed to 23)
+// function displayNumbersDivisible() {
+//   let sum = 0;
+
+//   for (let i = 0; i <= 500; i++) {
+//     if (i % 23 === 0) {
+//       console.log(i);
+//       sum += i;
+//     }
+//   }
+
+//   console.log("Sum :", sum);
+// }
+
+// // Call the basic version
+// displayNumbersDivisible();
+
+// bonus
+
+// function displayNumbersDivisible(divisor) {
+//   let sum = 0;
+
+//   for (let i = 0; i <= 500; i++) {
+//     if (i % divisor === 0) {
+//       console.log(i);
+//       sum += i;
+//     }
+//   }
+
+//   console.log("Sum :", sum);
+// }
+
+// // Example usage:
+// displayNumbersDivisible(3);   // Will print all numbers divisible by 3 and their sum
+// displayNumbersDivisible(45);  // Will print all numbers divisible by 45 and their sum
+
+// exo2  -->
+<!-- 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🛒 Mon Panier</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #4CAF50;
+      font-size: 2em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    li {
+      font-size: 1.1em;
+      padding: 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    li.out-of-stock {
+      color: #bbb;
+      font-style: italic;
+    }
+
+    .total {
+      margin-top: 20px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .stock-info {
+      margin-top: 25px;
+      font-size: 0.9em;
+      color: #666;
+      text-align: left;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .emoji {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>🛍️ Mon Panier</h1>
+    <ul id="items"></ul>
+    <div class="total" id="total"></div>
+    <div class="stock-info" id="stock"></div>
+  </div>
+
+  <script>
+    const stock = { 
+        "banana": 6, 
+        "apple": 0,
+        "pear": 12,
+        "orange": 32,
+        "blueberry": 1
+    };  
+
+    const prices = {    
+        "banana": 4, 
+        "apple": 2, 
+        "pear": 1,
+        "orange": 1.5,
+        "blueberry": 10
+    }; 
+
+    const shoppingList = ["banana", "orange", "apple"];
+
+    function myBill() {
+      let total = 0;
+      const listElement = document.getElementById("items");
+      listElement.innerHTML = "";
+
+      shoppingList.forEach(item => {
+        if (item in stock && stock[item] > 0) {
+          total += prices[item];
+          stock[item] -= 1;
+          listElement.innerHTML += `<li><span class="emoji">✔️</span>${item} - $${prices[item]}</li>`;
+        } else {
+          listElement.innerHTML += `<li class="out-of-stock"><span class="emoji">❌</span>${item} - Indisponible</li>`;
+        }
+      });
+
+      document.getElementById("total").innerText = "💰 Total : $" + total.toFixed(2);
+
+      const stockDisplay = Object.entries(stock)
+        .map(([item, quantity]) => `📦 ${item}: ${quantity}`)
+        .join("<br>");
+
+      document.getElementById("stock").innerHTML = `<strong>Stock mis à jour :</strong><br>${stockDisplay}`;
+    }
+
+    // Exécute la fonction au chargement
+    myBill();
+  </script>
+
+</body>
+</html> -->
+
+
+<!-- exo3  -->
+<!--  
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Change Enough ? 💰</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      color: #4caf50;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px 0;
+      font-weight: 600;
+      color: #555;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 1.3em;
+      font-weight: 700;
+      color: #333;
+      min-height: 1.5em;
+      transition: color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💰 Change Enough ?</h1>
+    
+    <label for="price">Prix de l'article (€) :</label>
+    <input type="number" id="price" min="0" step="0.01" placeholder="Exemple : 4.25" />
+
+    <label for="quarters">Nombre de quarters (0.25$) :</label>
+    <input type="number" id="quarters" min="0" value="0" />
+
+    <label for="dimes">Nombre de dimes (0.10$) :</label>
+    <input type="number" id="dimes" min="0" value="0" />
+
+    <label for="nickels">Nombre de nickels (0.05$) :</label>
+    <input type="number" id="nickels" min="0" value="0" />
+
+    <label for="pennies">Nombre de pennies (0.01$) :</label>
+    <input type="number" id="pennies" min="0" value="0" />
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function changeEnough(itemPrice, amountOfChange) {
+      const coinValues = [0.25, 0.10, 0.05, 0.01];
+      let total = 0;
+      for (let i = 0; i < amountOfChange.length; i++) {
+        total += amountOfChange[i] * coinValues[i];
+      }
+      return total >= itemPrice;
+    }
+
+    function updateResult() {
+      const price = parseFloat(document.getElementById("price").value);
+      const quarters = parseInt(document.getElementById("quarters").value) || 0;
+      const dimes = parseInt(document.getElementById("dimes").value) || 0;
+      const nickels = parseInt(document.getElementById("nickels").value) || 0;
+      const pennies = parseInt(document.getElementById("pennies").value) || 0;
+
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(price) || price < 0) {
+        resultDiv.style.color = "#e53935";
+        resultDiv.textContent = "⚠️ Merci d'entrer un prix valide.";
+        return;
+      }
+
+      const canAfford = changeEnough(price, [quarters, dimes, nickels, pennies]);
+
+      if (canAfford) {
+        resultDiv.style.color = "#4caf50";
+        resultDiv.textContent = "✅ Vous pouvez payer cet article !";
+      } else {
+        resultDiv.style.color = "#e53935";
+        resultDiv.textContent = "❌ Vous n'avez pas assez de monnaie.";
+      }
+    }
+
+    // Sélectionne tous les inputs et écoute l'événement 'input' pour calcul en temps réel
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => input.addEventListener('input', updateResult));
+
+    // Initial call pour afficher un message par défaut
+    updateResult();
+  </script>
+
+</body>
+</html> -->
+
+<!-- exo4
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌴 Vacation Cost Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select, button {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🌍 Vacation Cost Calculator</h2>
+
+    <label for="nights">1. Number of hotel nights:</label>
+    <input type="number" id="nights" placeholder="e.g. 5">
+
+    <label for="destination">2. Destination:</label>
+    <select id="destination">
+      <option value="">-- Select a destination --</option>
+      <option value="london">London</option>
+      <option value="paris">Paris</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="days">3. Car rental days:</label>
+    <input type="number" id="days" placeholder="e.g. 7">
+
+    <button onclick="totalVacationCost()">Calculate Total Cost</button>
+
+    <div class="error" id="error"></div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function hotelCost(nights) {
+      const pricePerNight = 140;
+      return nights * pricePerNight;
+    }
+
+    function planeRideCost(destination) {
+      switch (destination) {
+        case "london":
+          return 183;
+        case "paris":
+          return 220;
+        case "other":
+          return 300;
+        default:
+          return null;
+      }
+    }
+
+    function rentalCarCost(days) {
+      const pricePerDay = 40;
+      let total = days * pricePerDay;
+      if (days > 10) {
+        total *= 0.95;
+      }
+      return total;
+    }
+
+    function totalVacationCost() {
+      const errorDiv = document.getElementById("error");
+      errorDiv.textContent = "";
+      document.getElementById("result").innerHTML = "";
+
+      const nights = parseInt(document.getElementById("nights").value);
+      const destination = document.getElementById("destination").value;
+      const days = parseInt(document.getElementById("days").value);
+
+      const errors = [];
+      if (isNaN(nights) || nights <= 0) {
+        errors.push("Please enter a valid number of nights.");
+      }
+      if (!destination) {
+        errors.push("Please select a valid destination.");
+      }
+      if (isNaN(days) || days <= 0) {
+        errors.push("Please enter a valid number of car rental days.");
+      }
+
+      if (errors.length > 0) {
+        errorDiv.innerHTML = errors.join("<br>");
+        return;
+      }
+
+      const hotel = hotelCost(nights);
+      const plane = planeRideCost(destination);
+      const car = rentalCarCost(days);
+      const total = hotel + plane + car;
+
+      document.getElementById("result").innerHTML =
+        `Hotel cost: $${hotel.toFixed(2)}<br>` +
+        `Plane ticket cost: $${plane.toFixed(2)}<br>` +
+        `Car rental cost: $${car.toFixed(2)}<br><br>` +
+        `🚀 <strong>Total Vacation Cost: $${total.toFixed(2)}</strong>`;
+    }
+  </script>
+</body>
+</html> -->
+
+<!-- exo5 -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧑‍💻 Exercise 5: Users</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    #container {
+      background-color: lightblue;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .list {
+      margin-bottom: 15px;
+    }
+    .hidden {
+      display: none;
+    }
+    .highlight {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">Users:</div>
+  <ul class="list">
+    <li>John</li>
+    <li>Pete</li>
+  </ul>
+  <ul class="list">
+    <li>David</li>
+    <li>Sarah</li>
+    <li>Dan</li>
+  </ul>
+
+  <script>
+    // 1. Retrieve the div and console.log it
+    const container = document.getElementById("container");
+    console.log(container);
+
+    // 2. Change "Pete" to "Richard"
+    const firstList = document.querySelectorAll(".list")[0];
+    firstList.children[1].textContent = "Richard";
+
+    // 3. Delete second <li> of second <ul>
+    const secondList = document.querySelectorAll(".list")[1];
+    secondList.removeChild(secondList.children[1]);
+
+    // 4. Change first <li> of each <ul> to your name
+    document.querySelectorAll(".list").forEach(ul => {
+      ul.children[0].textContent = "Nada";
+    });
+
+    // 5. Add class student_list to both <ul>'s
+    document.querySelectorAll(".list").forEach(ul => {
+      ul.classList.add("student_list");
+    });
+
+    // 6. Add class university and attendance to the first <ul>
+    firstList.classList.add("university", "attendance");
+
+    // 7. Add light blue background and padding to <div>
+    container.style.backgroundColor = "lightblue";
+    container.style.padding = "20px";
+
+    // 8. Hide <li> with text "Dan"
+    const allLis = document.querySelectorAll("li");
+    allLis.forEach(li => {
+      if (li.textContent === "Dan") {
+        li.classList.add("hidden");
+      }
+    });
+
+    // 9. Add border to <li> with "Richard"
+    allLis.forEach(li => {
+      if (li.textContent === "Richard") {
+        li.classList.add("highlight");
+      }
+    });
+
+    // 10. Change font size of body
+    document.body.style.fontSize = "20px";
+
+    // Bonus: if background is light blue, alert "Hello x and y"
+    const names = document.querySelectorAll("ul")[0].querySelectorAll("li");
+    if (container.style.backgroundColor === "lightblue") {
+      alert(`Hello ${names[0].textContent} and ${names[1].textContent}`);
+    }
+  </script>
+</body>
+</html> -->
+
+<!-- exo6 -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 6 - Change the Navbar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 40px;
+      text-align: center;
+    }
+    #socialNetworkNavigation {
+      background-color: #333;
+      padding: 10px;
+      border-radius: 8px;
+      display: inline-block;
+      animation: fadeIn 1s ease-in-out;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+    li {
+      display: inline;
+    }
+    li a {
+      text-decoration: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    li a:hover {
+      background-color: #575757;
+    }
+    .logout a {
+      background-color: #e63946;
+    }
+    .logout a:hover {
+      background-color: #c02e3c;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="navBar">
+    <ul>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">My Friends</a></li>
+      <li><a href="#">Messenger</a></li>
+      <li><a href="#">My Pics</a></li>
+    </ul>
+  </div>
+
+  <script>
+    // Change ID of navBar
+    const navBar = document.getElementById("navBar");
+    navBar.setAttribute("id", "socialNetworkNavigation");
+
+    // Get the updated element and the <ul>
+    const socialNav = document.getElementById("socialNetworkNavigation");
+    const ul = socialNav.querySelector("ul");
+
+    // Create new <li> and <a> for Logout
+    const logoutLi = document.createElement("li");
+    logoutLi.classList.add("logout");
+    const logoutLink = document.createElement("a");
+    logoutLink.href = "#";
+    logoutLink.textContent = "Logout";
+
+    // Add event listener for logout click
+    logoutLink.addEventListener("click", () => {
+      alert("You have been logged out.");
+    });
+
+    // Append <a> to <li>, then <li> to <ul>
+    logoutLi.appendChild(logoutLink);
+    ul.appendChild(logoutLi);
+
+    // Display first and last <li> text
+    const firstLi = ul.firstElementChild;
+    const lastLi = ul.lastElementChild;
+    console.log("First link:", firstLi.textContent);
+    console.log("Last link:", lastLi.textContent);
+  </script>
+</body>
+</html> -->
+
+
+<!-- exo7 -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercise 7 - My Book List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    section.listBooks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+    }
+    .book {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .book:hover {
+      transform: translateY(-5px);
+    }
+    .book img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    .book p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+    .book.read {
+      color: crimson;
+    }
+  </style>
+</head>
+<body>
+  <section class="listBooks"></section>
+
+  <script>
+    const allBooks = [
+      {
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        image: "https://upload.wikimedia.org/wikipedia/en/f/f7/TheGreatGatsby_1925jacket.jpeg",
+        alreadyRead: true
+      },
+      {
+        title: "1984",
+        author: "George Orwell",
+        image: "https://upload.wikimedia.org/wikipedia/en/c/c3/1984first.jpg",
+        alreadyRead: false
+      }
+    ];
+
+    const section = document.querySelector(".listBooks");
+
+    allBooks.forEach(book => {
+      const bookDiv = document.createElement("div");
+      bookDiv.className = "book";
+      if (book.alreadyRead) {
+        bookDiv.classList.add("read");
+      }
+
+      bookDiv.innerHTML = `
+        <img src="${book.image}" alt="${book.title} cover">
+        <p><strong>${book.title}</strong> written by ${book.author}</p>
+      `;
+
+      section.appendChild(bookDiv);
+    });
+  </script>
+</body>
+</html> -->
