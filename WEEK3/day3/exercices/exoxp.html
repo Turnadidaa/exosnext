@@ -1,0 +1,846 @@
+<!-- exo1 -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chocolate Facts</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f3ef;
+      color: #333;
+      padding: 30px;
+      line-height: 1.6;
+    }
+
+    article {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+
+    h1 {
+      color: #5e2605;
+      font-size: 2.5rem;
+      transition: font-size 0.3s ease;
+      cursor: pointer;
+    }
+
+    h2 {
+      color: #a0522d;
+      cursor: pointer;
+      padding: 5px;
+      border-left: 5px solid #d2691e;
+    }
+
+    h3 {
+      color: #8b4513;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      background-color: #a0522d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #7b3e18;
+    }
+
+    /* BONUS fade-out */
+    .fade-out {
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+<article>
+  <h1 id="title">Some Facts</h1>
+  <h2 id="subtitle">The Chocolate</h2>
+  <h3 id="history">History of the chocolate</h3>
+  <p>Chocolate is made from tropical Theobroma cacao tree seeds. 
+  Its earliest use dates back to the Olmec civilization in Mesoamerica.</p>
+  <p id="second-paragraph">After the European discovery of the Americas, chocolate became 
+  very popular in the wider world, and its demand exploded.</p>
+  <p>Chocolate has since become a popular food product that millions enjoy every day, 
+  thanks to its unique, rich, and sweet taste.</p> 
+  <p>But what effect does eating chocolate have on our health?</p> 
+</article>
+
+<button id="bold-btn">Make all paragraphs bold</button>
+
+<script>
+  // Récupérer le h1 et le loguer
+  const h1 = document.querySelector('h1');
+  console.log(h1);
+
+  // Supprimer le dernier paragraphe
+  const article = document.querySelector('article');
+  const paragraphs = article.getElementsByTagName('p');
+  if (paragraphs.length > 0) {
+    const lastParagraph = paragraphs[paragraphs.length - 1];
+    article.removeChild(lastParagraph);
+  }
+
+  // Changer la couleur de fond du h2 au clic
+  const h2 = document.getElementById('subtitle');
+  h2.addEventListener('click', function () {
+    h2.style.backgroundColor = 'red';
+    h2.style.color = 'white';
+  });
+
+  // Cacher le h3 au clic
+  const h3 = document.getElementById('history');
+  h3.addEventListener('click', function () {
+    h3.style.display = 'none';
+  });
+
+  // Mettre les paragraphes en gras
+  const boldButton = document.getElementById('bold-btn');
+  boldButton.addEventListener('click', function () {
+    const allParagraphs = article.getElementsByTagName('p');
+    for (let p of allParagraphs) {
+      p.style.fontWeight = 'bold';
+    }
+  });
+
+  // BONUS : Taille aléatoire du h1 au survol
+  h1.addEventListener('mouseover', function () {
+    const randomSize = Math.floor(Math.random() * 101); // 0 à 100px
+    h1.style.fontSize = randomSize + 'px';
+  });
+
+  // BONUS : Fade-out du 2e paragraphe
+  const secondPara = document.getElementById('second-paragraph');
+  secondPara.addEventListener('mouseover', function () {
+    secondPara.classList.add('fade-out');
+  });
+</script>
+
+</body>
+</html> -->
+
+<!-- exo2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Exercise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        input[type="submit"] {
+            background: #3498db;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        input[type="submit"]:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .usersAnswer {
+            list-style: none;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .usersAnswer li {
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            color: #2c3e50;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Information</h2>
+        
+        Formulaire HTML -->
+        <!-- <form id="userForm">
+            <div class="form-group">
+                <label for="fname">First name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Enter your first name">
+                <div class="error" id="fnameError">First name is required</div>
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Last name</label>
+                <input type="text" id="lname" name="lastname" placeholder="Enter your last name">
+                <div class="error" id="lnameError">Last name is required</div>
+            </div>
+
+            <input type="submit" value="Submit" id="submit">
+        </form> 
+
+        <ul class="usersAnswer"></ul>
+    </div>
+
+    <!- Script JavaScript -->
+    <!-- <script>
+        const form = document.getElementById("userForm");
+        const inputFirstName = document.getElementById("fname");
+        const inputLastName = document.getElementById("lname");
+        const fnameError = document.getElementById("fnameError");
+        const lnameError = document.getElementById("lnameError");
+
+        // Function to show error
+        function showError(input, errorElement) {
+            input.style.borderColor = '#e74c3c';
+            errorElement.style.display = 'block';
+            input.classList.add('shake');
+            setTimeout(() => input.classList.remove('shake'), 500);
+        }
+
+        // Function to hide error
+        function hideError(input, errorElement) {
+            input.style.borderColor = '#e0e0e0';
+            errorElement.style.display = 'none';
+        }
+
+        // Input event listeners for real-time validation
+        inputFirstName.addEventListener('input', () => hideError(inputFirstName, fnameError));
+        inputLastName.addEventListener('input', () => hideError(inputLastName, lnameError));
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let hasError = false;
+
+            const firstNameValue = inputFirstName.value.trim();
+            const lastNameValue = inputLastName.value.trim();
+
+            // Validation
+            if (firstNameValue === "") {
+                showError(inputFirstName, fnameError);
+                hasError = true;
+            }
+            if (lastNameValue === "") {
+                showError(inputLastName, lnameError);
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            // Success submission
+            const ul = document.querySelector(".usersAnswer");
+            ul.innerHTML = "";
+
+            [firstNameValue, lastNameValue].forEach(value => {
+                const li = document.createElement("li");
+                li.textContent = value;
+                ul.appendChild(li);
+            });
+
+            // Reset form
+            form.reset();
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!-- EXO3 -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 3 - Text Transform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e0e0e0;
+        }
+
+        #paragraph {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        #paragraph:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        strong {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 2px 5px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        strong:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .highlight {
+            color: #3498db;
+        }
+
+        .instructions {
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            border-left: 4px solid #ffd54f;
+        }
+
+        .instructions h3 {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(52, 152, 219, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.2); }
+        }
+
+        .active-word {
+            animation: glow 2s infinite;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Text Transform</h1>
+        
+        <div id="paragraph">
+            <p><strong>Hello</strong> I hope you are enjoying <strong>this</strong> class. At the
+            <strong>end</strong> you <strong>will</strong> be great Developers!
+            <strong>Enjoy</strong> the <strong>JavaScript</strong> lessons</p>
+        </div>
+
+        <div class="instructions">
+            <h3>👋 How to interact</h3>
+            <p>Move your mouse over the text to see the magic happen! All bold words will transform when you hover over the paragraph.</p>
+        </div>
+    </div>
+
+    <script>
+        let allBoldItems;
+
+        function getBoldItems() {
+            allBoldItems = document.getElementsByTagName('strong');
+            return allBoldItems;
+        }
+
+        function highlight() {
+            const boldItems = getBoldItems();
+            for(let item of boldItems) {
+                item.style.color = '#3498db';
+                item.classList.add('active-word');
+            }
+        }
+
+        function returnItemsToDefault() {
+            const boldItems = getBoldItems();
+            for(let item of boldItems) {
+                item.style.color = '#2c3e50';
+                item.classList.remove('active-word');
+            }
+        }
+
+        const paragraph = document.getElementById('paragraph');
+        
+        paragraph.addEventListener('mouseover', highlight);
+        paragraph.addEventListener('mouseout', returnItemsToDefault);
+
+        // Individual word highlighting
+        const boldItems = getBoldItems();
+        for(let item of boldItems) {
+            item.addEventListener('mouseover', (e) => {
+                e.stopPropagation();
+                item.style.color = '#3498db';
+                item.classList.add('active-word');
+            });
+            
+            item.addEventListener('mouseout', (e) => {
+                e.stopPropagation();
+                if (!paragraph.matches(':hover')) {
+                    item.style.color = '#2c3e50';
+                    item.classList.remove('active-word');
+                }
+            });
+        }
+
+        getBoldItems();
+    </script>
+</body>
+</html>  -->
+
+
+<!-- exo4 -->
+
+<!-- <DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volume of a Sphere Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            border-radius: 2px;
+        }
+
+        p {
+            color: #666;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .form-group:focus-within {
+            transform: scale(1.02);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .form-group:focus-within label {
+            color: #3498db;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+            background: white;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(45deg, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.4);
+        }
+
+        #volume {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+            font-weight: 500;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: rgba(231, 76, 60, 0.1);
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .error.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .formula {
+            background: linear-gradient(to right, #f8f9fa, #e8f0fe);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            text-align: center;
+            font-style: italic;
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .formula:hover {
+            transform: translateX(5px);
+        }
+
+        .result-animation {
+            animation: highlight 1s ease;
+        }
+
+        @keyframes highlight {
+            0% { background-color: rgba(52, 152, 219, 0.2); }
+            100% { background-color: #f8f9fa; }
+        }
+
+        /* Loading indicator */
+        .loading {
+            display: none;
+            margin: 0 auto;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sphere Volume Calculator</h1>
+        <p>Enter the radius to discover the volume of your sphere</p>
+
+        <form id="MyForm">
+            <div class="form-group">
+                <label for="radius">Radius (in units)</label>
+                <input type="number" name="radius" id="radius" step="any" required 
+                       placeholder="Enter the radius here..." autocomplete="off">
+                <div class="error" id="radiusError">
+                    Please enter a valid positive number
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="volume">Volume</label>
+                <input type="text" name="volume" id="volume" readonly 
+                       placeholder="Your result will appear here">
+            </div>
+
+            <input type="submit" value="Calculate Volume" id="submit">
+            <div class="loading" id="loading"></div>
+        </form>
+
+        <div class="formula">
+            Formula: V = (4/3) × π × r³
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('MyForm');
+        const volumeInput = document.getElementById('volume');
+        const radiusInput = document.getElementById('radius');
+        const errorElement = document.getElementById('radiusError');
+        const loading = document.getElementById('loading');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const radius = parseFloat(radiusInput.value);
+            
+            // Validate input
+            if (isNaN(radius) || radius <= 0) {
+                errorElement.classList.add('show');
+                volumeInput.value = '';
+                return;
+            }
+            
+            errorElement.classList.remove('show');
+            
+            // Show loading
+            loading.style.display = 'block';
+            volumeInput.value = 'Calculating...';
+            
+            // Simulate calculation time for better UX
+            setTimeout(() => {
+                // Calculate volume: V = (4/3) × π × r³
+                const volume = (4/3) * Math.PI * Math.pow(radius, 3);
+                
+                // Display result with 2 decimal places
+                volumeInput.value = volume.toFixed(2) + ' cubic units';
+                volumeInput.classList.add('result-animation');
+                
+                // Hide loading
+                loading.style.display = 'none';
+                
+                // Remove animation class after it completes
+                setTimeout(() => {
+                    volumeInput.classList.remove('result-animation');
+                }, 1000);
+            }, 500);
+        });
+
+        // Clear error on input
+        radiusInput.addEventListener('input', function() {
+            errorElement.classList.remove('show');
+        });
+
+        // Add input validation feedback
+        radiusInput.addEventListener('input', function(e) {
+            const value = parseFloat(e.target.value);
+            if (value <= 0) {
+                this.style.borderColor = '#e74c3c';
+            } else {
+                this.style.borderColor = '#3498db';
+            }
+        });
+    </script>
+</body>
+</html> ! -->
