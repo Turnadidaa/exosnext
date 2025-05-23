@@ -1,0 +1,274 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Mad Libs Adventure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: #2d3436;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #5f27cd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #5f27cd);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin: 1rem 0;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .form-group:focus-within {
+            transform: scale(1.02);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d3436;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .form-group:focus-within label {
+            color: #5f27cd;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #5f27cd;
+            box-shadow: 0 0 0 4px rgba(95, 39, 205, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #lib-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            margin-top: 1rem;
+        }
+
+        #shuffle-button {
+            background: linear-gradient(45deg, #5f27cd, #6c5ce7);
+            color: white;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #story-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(to right, #f8f9fa, #e8f0fe);
+            border-radius: 15px;
+            border-left: 4px solid #5f27cd;
+            transition: all 0.3s ease;
+        }
+
+        #story {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2d3436;
+            transition: opacity 0.3s ease;
+        }
+
+        .highlight {
+            color: #5f27cd;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mad Libs Adventure</h1>
+
+        <form id="libform">
+            <div class="form-group">
+                <label for="noun">✨ Enter a Noun:</label>
+                <input type="text" id="noun" placeholder="e.g., dragon, book, rainbow">
+            </div>
+            <div class="form-group">
+                <label for="adjective">🎨 Choose an Adjective:</label>
+                <input type="text" id="adjective" placeholder="e.g., sparkly, mysterious, giant">
+            </div>
+            <div class="form-group">
+                <label for="person">👤 Name Someone:</label>
+                <input type="text" id="person" placeholder="e.g., Harry Potter, Mom, Batman">
+            </div>
+            <div class="form-group">
+                <label for="verb">🏃‍♂️ Add a Verb:</label>
+                <input type="text" id="verb" placeholder="e.g., dance, fly, sing">
+            </div>
+            <div class="form-group">
+                <label for="place">🌍 Name a Place:</label>
+                <input type="text" id="place" placeholder="e.g., Mars, Hogwarts, beach">
+            </div>
+            <button type="submit" id="lib-button">Create Your Story! ✨</button>
+        </form>
+
+        <button id="shuffle-button">🔄 Shuffle Story</button>
+
+        <div id="story-container" style="display: none;">
+            <p>Your magical story:</p>
+            <p id="story"></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("libform");
+        const storyOutput = document.getElementById("story");
+        const shuffleBtn = document.getElementById("shuffle-button");
+        const storyContainer = document.getElementById("story-container");
+
+        const storyTemplates = [
+            (v) => `One magical day, <span class="highlight">${v.person}</span> discovered a <span class="highlight">${v.adjective}</span> <span class="highlight">${v.noun}</span> and decided to <span class="highlight">${v.verb}</span> all the way to <span class="highlight">${v.place}</span>!`,
+            (v) => `Deep in the heart of <span class="highlight">${v.place}</span>, <span class="highlight">${v.person}</span> encountered a <span class="highlight">${v.noun}</span> that was surprisingly <span class="highlight">${v.adjective}</span> and couldn't resist ${v.verb}ing with joy!`,
+            (v) => `Legend says that <span class="highlight">${v.person}</span> once tried to <span class="highlight">${v.verb}</span> with a <span class="highlight">${v.adjective}</span> <span class="highlight">${v.noun}</span> while visiting <span class="highlight">${v.place}</span>. What an adventure!`
+        ];
+
+        let values = {};
+
+        function displayRandomStory() {
+            storyContainer.style.opacity = '0';
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * storyTemplates.length);
+                const story = storyTemplates[randomIndex](values);
+                storyOutput.innerHTML = story;
+                storyContainer.style.display = 'block';
+                storyContainer.style.opacity = '1';
+            }, 300);
+        }
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            values = {
+                noun: document.getElementById("noun").value.trim(),
+                adjective: document.getElementById("adjective").value.trim(),
+                person: document.getElementById("person").value.trim(),
+                verb: document.getElementById("verb").value.trim(),
+                place: document.getElementById("place").value.trim()
+            };
+
+            for (let key in values) {
+                if (values[key] === "") {
+                    alert("Please fill in all the magical fields! ✨");
+                    return;
+                }
+            }
+
+            displayRandomStory();
+            shuffleBtn.style.display = "block";
+            shuffleBtn.classList.add('fade-in');
+        });
+
+        shuffleBtn.addEventListener("click", displayRandomStory);
+
+        // Add input animations
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+    </script>
+</body>
+</html>  -->
