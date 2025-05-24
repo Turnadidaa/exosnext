@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coloring Squares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-image: url('static/background.png');
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-position: center;
+      background-color: #ffd4e5; /* Couleur de fond au cas où l'image ne couvre pas tout */
+      background-attachment: fixed;
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Ajout d'un overlay très léger pour améliorer la lisibilité */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.2);
+      z-index: -1;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #E07A5F;
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      margin: 0;
+      margin-bottom: 5px;
+      text-align: center;
+      position: relative;
+     
+    }
+
+    .main-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 0;
+    }
+
+    #palette {
+      position: fixed;
+      left: 200px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      z-index: 10;
+    }
+
+    .color-picker-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .color-picker-container:hover {
+      transform: scale(1.1);
+    }
+
+    .color-picker-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    .pixel {
+      width: 100%;
+      height: 100%;
+      background: #ff6b6b;
+    }
+
+    .empty {
+      background: transparent;
+    }
+
+    #color-picker {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .picker-label {
+      font-family: 'Pacifico', cursive;
+      color: #E07A5F;
+      font-size: 1.2rem;
+      margin-bottom: 2px;
+    }
+
+    #drawing-board {
+      display: grid;
+      grid-template-columns: repeat(16, 30px);
+      grid-template-rows: repeat(16, 30px);
+      gap: 1px;
+      background: #ddd;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .square {
+      width: 30px;
+      height: 30px;
+      background-color: white;
+      border: 1px solid #eee;
+      transition: background-color 0.2s ease;
+      border-radius: 3px;
+    }
+
+    .square:hover {
+      transform: scale(1.1);
+      z-index: 1;
+    }
+
+    #clear-btn {
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(45deg, #E07A5F, #81B29A);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      margin: 0 auto;
+      display: block;
+    }
+
+    #clear-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #clear-btn:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Coloring Squares</h1>
+  
+  <div class="main-container">
+    <div id="palette">
+      <div class="picker-label">Pick any color</div>
+      <div class="color-picker-container">
+        <input type="color" id="color-picker" value="#FF6B6B">
+        <img src="static/colorpicker2.png" alt="Color Picker" class="color-picker-image">
+      </div>
+    </div>
+
+    <div class="game-container">
+      <div id="drawing-board"></div>
+      <button id="clear-btn">Effacer tout</button>
+    </div>
+  </div>
+
+  <script>
+    const board = document.getElementById("drawing-board");
+    const colorPicker = document.getElementById("color-picker");
+    const clearBtn = document.getElementById("clear-btn");
+
+    let selectedColor = colorPicker.value;
+    let isDrawing = false;
+
+    // Mise à jour de la couleur sélectionnée
+    colorPicker.addEventListener('input', (e) => {
+      selectedColor = e.target.value;
+    });
+
+    // Créer la grille
+    for (let i = 0; i < 16 * 16; i++) {
+      const square = document.createElement("div");
+      square.classList.add("square");
+      board.appendChild(square);
+
+      square.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        if (e.button === 0) { // Clic gauche
+          isDrawing = true;
+          square.style.backgroundColor = selectedColor;
+        } else if (e.button === 2) { // Clic droit
+          square.style.backgroundColor = "white";
+        }
+      });
+
+      square.addEventListener("mouseover", () => {
+        if (isDrawing) {
+          square.style.backgroundColor = selectedColor;
+        }
+      });
+
+      square.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
+    }
+
+    // Gérer les clics de souris
+    board.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      isDrawing = true;
+    });
+    
+    document.body.addEventListener("mouseup", () => {
+      isDrawing = false;
+    });
+
+    document.body.addEventListener("mouseleave", () => {
+      isDrawing = false;
+    });
+
+    // Bouton effacer
+    clearBtn.addEventListener("click", () => {
+      document.querySelectorAll(".square").forEach(square => {
+        square.style.backgroundColor = "white";
+      });
+    });
+  </script>
+</body>
+</html>
