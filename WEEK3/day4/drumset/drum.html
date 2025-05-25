@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Kit - Jouez de la batterie !</title>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: url('static/background2.png') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .welcome-message {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px #00fff7, 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .drum-pads-bottom {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .drum-pad {
+            width: 70px;
+            height: 70px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.35);
+            color: #fff;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.1s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 16px #00fff7, 0 0 8px #ff00de;
+            text-shadow: 0 0 8px #00fff7, 0 0 2px #ff00de;
+            z-index: 11;
+            opacity: 0.95;
+            pointer-events: auto;
+        }
+        .drum-pad:active, .drum-pad.active {
+            background: rgba(255,0,222,0.7);
+            color: #fff;
+            box-shadow: 0 0 32px #ff00de, 0 0 16px #00fff7;
+        }
+        .key {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .sound-name {
+            font-size: 0.7em;
+            color: #bafffa;
+        }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            z-index: 2;
+            position: relative;
+        }
+        @media (max-width: 1000px) {
+            .drum-pad { width: 50px; height: 50px; font-size: 1em; }
+            .drum-pads-bottom { gap: 16px; }
+        }
+        @media (max-width: 600px) {
+            .drum-pad { width: 32px; height: 32px; font-size: 0.7em; }
+            .drum-pads-bottom { gap: 6px; bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="welcome-message">
+            Bienvenue, <span id="username-display"></span> !
+        </div>
+    </div>
+    <div class="drum-pads-bottom">
+        <button class="drum-pad" data-key="a" data-sound="kick">
+            <span class="key">A</span>
+            <span class="sound-name">Kick</span>
+        </button>
+        <button class="drum-pad" data-key="s" data-sound="snare">
+            <span class="key">S</span>
+            <span class="sound-name">Snare</span>
+        </button>
+        <button class="drum-pad" data-key="d" data-sound="tom">
+            <span class="key">D</span>
+            <span class="sound-name">Tom</span>
+        </button>
+        <button class="drum-pad" data-key="f" data-sound="hihat">
+            <span class="key">F</span>
+            <span class="sound-name">Hi-Hat</span>
+        </button>
+        <button class="drum-pad" data-key="g" data-sound="openhat">
+            <span class="key">G</span>
+            <span class="sound-name">Open Hat</span>
+        </button>
+        <button class="drum-pad" data-key="h" data-sound="ride">
+            <span class="key">H</span>
+            <span class="sound-name">Ride</span>
+        </button>
+        <button class="drum-pad" data-key="j" data-sound="boom">
+            <span class="key">J</span>
+            <span class="sound-name">Boom</span>
+        </button>
+        <button class="drum-pad" data-key="k" data-sound="clap">
+            <span class="key">K</span>
+            <span class="sound-name">Clap</span>
+        </button>
+        <button class="drum-pad" data-key="l" data-sound="tink">
+            <span class="key">L</span>
+            <span class="sound-name">Tink</span>
+        </button>
+    </div>
+    <div class="footer">
+        Appuyez sur les touches A-L pour jouer
+    </div>
+    <script>
+        // Vérifier si l'utilisateur a entré son nom
+        window.addEventListener('load', function() {
+            const username = localStorage.getItem('drumKitUsername');
+            if (!username) {
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('username-display').textContent = username;
+            }
+        });
+        // Fonction pour jouer le son
+        function playSound(soundName) {
+            const audio = new Audio(`sounds/${soundName}.wav`);
+            audio.currentTime = 0;
+            audio.play();
+        }
+        // Gestion des clics sur les boutons
+        document.querySelectorAll('.drum-pad').forEach(pad => {
+            pad.addEventListener('click', function() {
+                const sound = this.getAttribute('data-sound');
+                playSound(sound);
+                this.classList.add('active');
+                setTimeout(() => this.classList.remove('active'), 100);
+            });
+        });
+        // Gestion des touches du clavier
+        document.addEventListener('keydown', function(event) {
+            const key = event.key.toLowerCase();
+            const pad = document.querySelector(`.drum-pad[data-key="${key}"]`);
+            if (pad) {
+                const sound = pad.getAttribute('data-sound');
+                playSound(sound);
+                pad.classList.add('active');
+                setTimeout(() => pad.classList.remove('active'), 100);
+            }
+        });
+    </script>
+</body>
+</html> 

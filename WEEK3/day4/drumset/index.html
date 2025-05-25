@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue sur Drum Kit</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-image: url('static/background1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .welcome-container {
+            text-align: center;
+            padding: 3rem 2.5rem;
+            background: rgba(10, 10, 30, 0.85);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px 5px #00fff7, 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+            border: 2px solid rgba(0,255,247,0.2);
+            margin-left: 5vw;
+            animation: neon-fadein 1s;
+        }
+
+        @keyframes neon-fadein {
+            from { opacity: 0; filter: blur(8px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            text-shadow:
+                0 0 8px #00fff7,
+                0 0 16px #00fff7,
+                0 0 32px #00fff7,
+                0 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+        }
+
+        .drum-emoji {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 8px #ff00de) drop-shadow(0 0 16px #00fff7);
+        }
+
+        .form-container {
+            margin-top: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            color: #fff;
+            text-shadow: 0 0 8px #00fff7, 0 1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #00fff7;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 0 12px #00fff7, 0 0 2px #ff00de;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #ff00de;
+            background: rgba(0, 0, 0, 0.85);
+            box-shadow: 0 0 18px #ff00de, 0 0 8px #00fff7;
+        }
+
+        input[type="text"]::placeholder {
+            color: #bafffa;
+            text-shadow: 0 0 6px #00fff7;
+        }
+
+        .start-btn {
+            background: linear-gradient(90deg, #ff00de 0%, #00fff7 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 18px #00fff7, 0 0 8px #ff00de;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-shadow: 0 0 8px #00fff7, 0 0 2px #ff00de;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 0 32px #ff00de, 0 0 16px #00fff7;
+            background: linear-gradient(90deg, #00fff7 0%, #ff00de 100%);
+        }
+
+        .start-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            .welcome-container {
+                padding: 2rem 1rem;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            h1 {
+                font-size: 2.1rem;
+            }
+
+            .start-btn {
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1><span class="drum-emoji">🥁</span> Drum Kit</h1>
+        <div class="form-container">
+            <form id="welcome-form">
+                <div class="input-group">
+                    <label for="username">Entrez votre nom pour commencer :</label>
+                    <input type="text" id="username" name="username" required 
+                           placeholder="Votre nom" autocomplete="off">
+                </div>
+                <button type="submit" class="start-btn">Commencer à jouer</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('welcome-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            
+            if (username) {
+                // Stocker le nom d'utilisateur dans le localStorage
+                localStorage.setItem('drumKitUsername', username);
+                
+                // Rediriger vers la page de la batterie
+                window.location.href = 'drum.html';
+            }
+        });
+    </script>
+</body>
+</html> 
