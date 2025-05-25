@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>XP Animation - Fun Edition</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+      background: url('static/bcanimation.png') no-repeat center center fixed, linear-gradient(135deg, #ffb347 0%, #ffccff 100%);
+      background-size: cover;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .confetti {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .confetti-emoji {
+      position: absolute;
+      font-size: 2.2rem;
+      animation: confetti-fall 2.5s linear forwards;
+      opacity: 0.85;
+      will-change: transform, opacity;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-60px) rotate(0deg) scale(1); opacity: 0.7; }
+      80% { opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg) scale(1.2); opacity: 0; }
+    }
+    #container {
+      margin: 60px 0 0 40px;
+      max-width: 420px;
+      min-height: 200px;
+      text-align: left;
+      z-index: 2;
+      position: relative;
+    }
+    p {
+      padding: 14px 10px;
+      margin: 18px 0;
+      border-radius: 16px;
+      font-weight: bold;
+      font-size: 1.3em;
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+      opacity: 0;
+      animation: fadeInBounce 1s forwards, rotatePop 1.2s;
+      text-shadow: 2px 2px 6px #fff, 1px 1px 2px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+      display: inline-block;
+      transform-origin: center;
+    }
+    @keyframes fadeInBounce {
+      0% { opacity: 0; transform: scale(0.7) translateY(40px); }
+      60% { opacity: 1; transform: scale(1.1) translateY(-10px); }
+      80% { transform: scale(0.95) translateY(5px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes rotatePop {
+      0% { transform: rotate(-10deg); }
+      50% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
+    }
+    #clear {
+      margin-top: 25px;
+      margin-left: 40px;
+      padding: 16px 32px;
+      background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 20px;
+      cursor: pointer;
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+      font-weight: bold;
+      box-shadow: 0 4px 18px #ffb34799;
+      transition: transform 0.3s, background 0.3s;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #fff;
+      position: relative;
+      z-index: 2;
+    }
+    #clear:active {
+      transform: scale(1.13) rotate(-4deg);
+      background: linear-gradient(90deg, #ff9966 0%, #ff5e62 100%);
+    }
+    #clear:disabled {
+      background: #bbb;
+      color: #eee;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    @media (max-width: 700px) {
+      #container { margin-left: 10px; max-width: 98vw; }
+      #clear { margin-left: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti" id="confetti"></div>
+  <div id="container"></div>
+  <button id="clear">🎉 Stop the Party! 🎉</button>
+  <audio id="pop-sound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae5b2.mp3"></audio>
+  <script>
+    // Confetti emojis
+    const confettiEmojis = ['🎉','🎈','😂','🤩','🥳','😜','✨','💥','🦄','🍕','🍔','🍟','🍦','🍭','🍉','🍩','🐸','🐧','🐙','👾'];
+    function launchConfetti() {
+      const confettiDiv = document.getElementById('confetti');
+      for(let i=0; i<16; i++) {
+        const emoji = document.createElement('span');
+        emoji.className = 'confetti-emoji';
+        emoji.textContent = confettiEmojis[Math.floor(Math.random()*confettiEmojis.length)];
+        emoji.style.left = Math.random()*95 + 'vw';
+        emoji.style.fontSize = (1.5 + Math.random()*2.5) + 'rem';
+        emoji.style.animationDuration = (1.7 + Math.random()*1.5) + 's';
+        confettiDiv.appendChild(emoji);
+        setTimeout(()=>emoji.remove(), 2600);
+      }
+    }
+
+    // Funny sound on first alert
+    function playPop() {
+      const audio = document.getElementById('pop-sound');
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    // Part I: Funny alert after 2 seconds
+    setTimeout(() => {
+      playPop();
+      alert("🎉 Surprise! Hello World just popped in!");
+      launchConfetti();
+    }, 2000);
+
+    // Part II: Add one colorful paragraph after 2 seconds
+    setTimeout(() => {
+      addFunnyParagraph();
+    }, 2000);
+
+    // Helper to generate random hex color
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for(let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    const container = document.getElementById("container");
+    const clearBtn = document.getElementById("clear");
+
+    // Function to add a funny paragraph with animation and colors
+    function addFunnyParagraph() {
+      const p = document.createElement("p");
+      const count = container.getElementsByTagName("p").length + 1;
+      const funnyEmojis = ['😂','🤖','🎈','🥳','😜','🦄','🍕','🍦','🍭','🐸','👾','💥','✨'];
+      const emoji = funnyEmojis[Math.floor(Math.random()*funnyEmojis.length)];
+      p.textContent = `Hello World #${count} ${emoji}`;
+      p.style.background = `linear-gradient(90deg, ${getRandomColor()} 0%, ${getRandomColor()} 100%)`;
+      p.style.color = getRandomColor();
+      p.style.border = `2.5px dashed ${getRandomColor()}`;
+      p.style.boxShadow = `0 0 18px ${getRandomColor()}`;
+      p.style.transform = `rotate(${Math.random()*16-8}deg)`;
+      p.addEventListener('mouseenter', () => {
+        p.style.transform = `scale(1.13) rotate(${Math.random()*16-8}deg)`;
+        p.style.filter = 'brightness(1.2)';
+      });
+      p.addEventListener('mouseleave', () => {
+        p.style.transform = `rotate(${Math.random()*16-8}deg)`;
+        p.style.filter = 'none';
+      });
+      container.appendChild(p);
+      launchConfetti();
+    }
+
+    // Part III: Add paragraph every 2 seconds until 5 paragraphs, or button click
+    let stopped = false;
+    const intervalId = setInterval(() => {
+      if (stopped) return;
+      addFunnyParagraph();
+      if (container.getElementsByTagName("p").length >= 5) {
+        clearInterval(intervalId);
+        clearBtn.textContent = "No more Hello Worlds! 🚫";
+        clearBtn.disabled = true;
+        clearBtn.style.background = '#bbb';
+        clearBtn.style.color = '#eee';
+        clearBtn.style.cursor = 'not-allowed';
+      }
+    }, 2000);
+
+    // Clear interval on button click with a bounce effect
+    clearBtn.addEventListener("click", () => {
+      stopped = true;
+      clearInterval(intervalId);
+      clearBtn.textContent = "No more Hello Worlds! 🚫";
+      clearBtn.disabled = true;
+      clearBtn.style.background = '#bbb';
+      clearBtn.style.color = '#eee';
+      clearBtn.style.cursor = 'not-allowed';
+      launchConfetti();
+    });
+  </script>
+</body>
+</html>

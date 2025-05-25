@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>XP Animation 2 - Fun Edition</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      height: 100vh;
+      width: 100vw;
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+      background: url('static/bc2.png') no-repeat center center fixed, linear-gradient(135deg, #f9d423 0%, #ff4e50 100%);
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    .game-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100vw;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #container {
+      width: 400px;
+      height: 400px;
+      position: relative;
+      background: linear-gradient(135deg, #fff700 0%, #ffe259 100%);
+      border-radius: 30px;
+      box-shadow: 0 8px 32px rgba(255, 200, 0, 0.25), 0 2px 8px #ff4e50;
+      margin-bottom: 30px;
+      overflow: hidden;
+      border: 4px solid #ff4e50;
+      z-index: 2;
+    }
+    #animate {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      background: linear-gradient(135deg, #ff4e50 0%, #f9d423 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 24px #ff4e50, 0 0 8px #fff700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: #fff;
+      border: 3px solid #fff;
+      transition: box-shadow 0.2s;
+      z-index: 3;
+      left: 0;
+      top: 170px;
+      user-select: none;
+    }
+    #animate.bounce {
+      animation: bounce 0.4s;
+    }
+    @keyframes bounce {
+      0% { transform: scale(1) translateY(0); }
+      30% { transform: scale(1.2) translateY(-20px); }
+      60% { transform: scale(0.95) translateY(10px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+    .btns {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    button {
+      padding: 16px 36px;
+      background: linear-gradient(90deg, #ff4e50 0%, #f9d423 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.3rem;
+      font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+      font-weight: bold;
+      box-shadow: 0 4px 18px #ffb34799;
+      transition: transform 0.2s, background 0.2s;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #fff;
+      cursor: pointer;
+    }
+    button:active {
+      transform: scale(1.08) rotate(-3deg);
+      background: linear-gradient(90deg, #f9d423 0%, #ff4e50 100%);
+    }
+    .party-emoji {
+      position: absolute;
+      font-size: 2.5rem;
+      pointer-events: none;
+      animation: emoji-pop 1.2s forwards;
+      z-index: 10;
+    }
+    @keyframes emoji-pop {
+      0% { opacity: 0; transform: scale(0.2) translateY(0); }
+      60% { opacity: 1; transform: scale(1.3) translateY(-40px); }
+      100% { opacity: 0; transform: scale(0.7) translateY(-80px); }
+    }
+    @media (max-width: 500px) {
+      #container { width: 98vw; height: 60vw; min-width: 180px; min-height: 120px; }
+      #animate { width: 32px; height: 32px; font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="game-center">
+    <div class="btns">
+      <button onclick="myMove()">🎈 Click Me for Fun! 🎉</button>
+      <button onclick="stopMove()" id="stopBtn">🛑 Stop</button>
+    </div>
+    <div id="container">
+      <div id="animate">😃</div>
+    </div>
+  </div>
+  <script>
+    let interval = null;
+    let direction = 1; // 1: right, -1: left
+    let position = 0;
+    const box = document.getElementById("animate");
+    const container = document.getElementById("container");
+    const emojis = ['😃','😂','🤩','🥳','😜','🦄','🍕','🍦','🍭','🐸','👾','💥','✨','🎉','🎈'];
+
+    function myMove() {
+      if(interval) return; // Prevent multiple intervals
+      box.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      interval = setInterval(() => {
+        if (position >= 340) {
+          direction = -1;
+          box.classList.add('bounce');
+          showPartyEmoji(position+30, 170);
+        } else if (position <= 0) {
+          direction = 1;
+          box.classList.add('bounce');
+          showPartyEmoji(position+10, 170);
+        }
+        position += direction * 2;
+        box.style.left = position + "px";
+        box.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      }, 8);
+    }
+    function stopMove() {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    }
+    box.addEventListener('animationend', () => box.classList.remove('bounce'));
+
+    function showPartyEmoji(x, y) {
+      const party = document.createElement('span');
+      party.className = 'party-emoji';
+      party.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      party.style.left = x + 'px';
+      party.style.top = (y-30) + 'px';
+      container.appendChild(party);
+      setTimeout(()=>party.remove(), 1200);
+    }
+  </script>
+</body>
+</html> 
