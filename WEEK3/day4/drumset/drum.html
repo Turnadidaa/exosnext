@@ -33,6 +33,44 @@
             margin-bottom: 0.5rem;
             text-shadow: 0 2px 8px #00fff7, 0 2px 4px rgba(0,0,0,0.5);
         }
+        .sticks-container {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 18vh;
+            width: 100vw;
+            height: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .stick {
+            position: absolute;
+            width: 120px;
+            height: auto;
+            transition: transform 0.18s cubic-bezier(.4,2,.6,1), filter 0.2s;
+            filter: drop-shadow(0 0 12px #00fff7);
+            opacity: 0.95;
+            pointer-events: none;
+        }
+        .stick-left {
+            left: 33vw;
+            top: 0;
+            
+            transform: rotate(-18deg);
+        }
+        .stick-right {
+            right: 44vw;
+            top: 0;
+            transform: rotate(18deg);
+        }
+        .stick-left.hit {
+            transform: rotate(-18deg) translateY(60px) rotate(-30deg) scale(1.05);
+            filter: drop-shadow(0 0 24px #ff00de);
+        }
+        .stick-right.hit {
+            transform: rotate(18deg) translateY(60px) rotate(30deg) scale(1.05);
+            filter: drop-shadow(0 0 24px #ff00de);
+        }
         .drum-pads-bottom {
             position: fixed;
             left: 0;
@@ -88,10 +126,16 @@
         @media (max-width: 1000px) {
             .drum-pad { width: 50px; height: 50px; font-size: 1em; }
             .drum-pads-bottom { gap: 16px; }
+            .stick { width: 70px; }
+            .stick-left { left: 38vw; }
+            .stick-right { right: 38vw; }
         }
         @media (max-width: 600px) {
             .drum-pad { width: 32px; height: 32px; font-size: 0.7em; }
             .drum-pads-bottom { gap: 6px; bottom: 10px; }
+            .stick { width: 40px; }
+            .stick-left { left: 30vw; }
+            .stick-right { right: 30vw; }
         }
     </style>
 </head>
@@ -100,6 +144,10 @@
         <div class="welcome-message">
             Bienvenue, <span id="username-display"></span> !
         </div>
+    </div>
+    <div class="sticks-container">
+        <img src="static/stick_left.png" alt="Baguette gauche" class="stick stick-left" id="stick-left">
+        <img src="static/stick_right.png" alt="Baguette droite" class="stick stick-right" id="stick-right">
     </div>
     <div class="drum-pads-bottom">
         <button class="drum-pad" data-key="a" data-sound="kick">
@@ -158,12 +206,29 @@
             audio.currentTime = 0;
             audio.play();
         }
+        // Animation des baguettes
+        function animateStick(key) {
+            // Baguette gauche : S, D, F, K
+            if (["s","d","f","k"].includes(key)) {
+                const stick = document.getElementById('stick-left');
+                stick.classList.add('hit');
+                setTimeout(() => stick.classList.remove('hit'), 180);
+            }
+            // Baguette droite : G, H, J, L
+            if (["g","h","j","l"].includes(key)) {
+                const stick = document.getElementById('stick-right');
+                stick.classList.add('hit');
+                setTimeout(() => stick.classList.remove('hit'), 180);
+            }
+        }
         // Gestion des clics sur les boutons
         document.querySelectorAll('.drum-pad').forEach(pad => {
             pad.addEventListener('click', function() {
                 const sound = this.getAttribute('data-sound');
+                const key = this.getAttribute('data-key');
                 playSound(sound);
                 this.classList.add('active');
+                animateStick(key);
                 setTimeout(() => this.classList.remove('active'), 100);
             });
         });
@@ -175,6 +240,7 @@
                 const sound = pad.getAttribute('data-sound');
                 playSound(sound);
                 pad.classList.add('active');
+                animateStick(key);
                 setTimeout(() => pad.classList.remove('active'), 100);
             }
         });
