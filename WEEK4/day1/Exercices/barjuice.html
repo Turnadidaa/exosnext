@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Juice Bar Interactive</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 450px;
+      margin: auto;
+    }
+    label, select, input, button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      font-size: 16px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    #juiceDisplay {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #006400;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Juice Bar</h1>
+
+  <label for="sizeSelect">Choose the size:</label>
+  <select id="sizeSelect">
+    <option value="small">Small</option>
+    <option value="medium" selected>Medium</option>
+    <option value="large">Large</option>
+  </select>
+
+  <form id="ingredientsForm">
+    <fieldset>
+      <legend>First 3 ingredients:</legend>
+      <input type="text" id="ing1" placeholder="Ingredient 1" required />
+      <input type="text" id="ing2" placeholder="Ingredient 2" required />
+      <input type="text" id="ing3" placeholder="Ingredient 3" required />
+    </fieldset>
+
+    <fieldset>
+      <legend>Second 3 ingredients:</legend>
+      <input type="text" id="ing4" placeholder="Ingredient 4" required />
+      <input type="text" id="ing5" placeholder="Ingredient 5" required />
+      <input type="text" id="ing6" placeholder="Ingredient 6" required />
+    </fieldset>
+
+    <button type="submit">Make Juice</button>
+  </form>
+
+  <div id="juiceDisplay"></div>
+
+  <script src="juice.js"></script>
+</body>
+</html>
