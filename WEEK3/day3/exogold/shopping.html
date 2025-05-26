@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    #root {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .clear-btn {
+      background-color: #f44336;
+      color: white;
+      width: 100%;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f0f0f0;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="root"></div>
+
+  <script>
+    let shoppingList = [];
+
+    const root = document.getElementById('root');
+
+    // Create form
+    const title = document.createElement('h2');
+    title.textContent = '🛒 Shopping List';
+
+    const form = document.createElement('form');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Enter item...';
+
+    const addBtn = document.createElement('button');
+    addBtn.textContent = 'Add Item';
+    addBtn.className = 'add-btn';
+    addBtn.type = 'submit';
+
+    const clearBtn = document.createElement('button');
+    clearBtn.textContent = 'Clear All';
+    clearBtn.className = 'clear-btn';
+
+    const list = document.createElement('ul');
+
+    form.appendChild(input);
+    form.appendChild(addBtn);
+    root.append(title, form, list, clearBtn);
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      addItem();
+    });
+
+    clearBtn.addEventListener('click', clearAll);
+
+    function addItem() {
+      const item = input.value.trim();
+      if (item) {
+        shoppingList.push(item);
+        updateList();
+        input.value = '';
+      }
+    }
+
+    function clearAll() {
+      shoppingList = [];
+      updateList();
+    }
+
+    function updateList() {
+      list.innerHTML = '';
+      shoppingList.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.appendChild(li);
+      });
+    }
+  </script>
+
+</body>
+</html>

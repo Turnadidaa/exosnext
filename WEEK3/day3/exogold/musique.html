@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Music Selector</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #444;
+      background-color: #fff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Select a kind of Music</h2>
+
+  <select id="genres">
+    <option value="rock">Rock</option>
+    <option value="blues" selected>Blues</option>
+  </select>
+
+  <p id="output"></p>
+
+  <script>
+    // Display the current selected option
+    const select = document.getElementById("genres");
+    const output = document.getElementById("output");
+
+    function displaySelectedOption() {
+      output.textContent = `🎶 Selected genre: ${select.value}`;
+    }
+
+    // Display initial selected value
+    displaySelectedOption();
+
+    // Listen for changes
+    select.addEventListener("change", displaySelectedOption);
+
+    // Add a new option
+    const newOption = new Option("Classic", "classic", true, true);
+    select.appendChild(newOption);
+
+    // Refresh output to show new default selection
+    displaySelectedOption();
+  </script>
+
+</body>
+</html>
