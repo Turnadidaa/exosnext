@@ -1,0 +1,211 @@
+<!-- <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>JS Exercises 2</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      background: #f0f0f8;
+      color: #222;
+    }
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+    pre {
+      background: #e8e8e8;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 15px;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 6px #aaa;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: center;
+      user-select: none;
+    }
+    th {
+      background-color: #4267B2;
+      color: white;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Exercise 1: Random Number</h2>
+<pre>
+// Génère un nombre aléatoire entre 1 et 100
+let randomNum = Math.floor(Math.random() * 100) + 1;
+console.log("Random number:", randomNum);
+
+// Affiche tous les nombres pairs de 0 à ce nombre
+for(let i = 0; i <= randomNum; i++) {
+  if(i % 2 === 0) {
+    console.log(i);
+  }
+}
+</pre>
+
+<h2>Exercise 2: Capitalized letters</h2>
+<pre>
+// Fonction qui retourne deux versions:
+// 1. Lettres aux indices pairs en majuscule
+// 2. Lettres aux indices impairs en majuscule
+function capitalize(str) {
+  let evenCaps = '';
+  let oddCaps = '';
+  for(let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if(i % 2 === 0) {
+      evenCaps += char.toUpperCase();
+      oddCaps += char.toLowerCase();
+    } else {
+      evenCaps += char.toLowerCase();
+      oddCaps += char.toUpperCase();
+    }
+  }
+  return [evenCaps, oddCaps];
+}
+
+console.log(capitalize("abcdef")); // ['AbCdEf', 'aBcDeF']
+</pre>
+
+<h2>Exercise 3: Is palindrome?</h2>
+<pre>
+// Vérifie si une chaîne est un palindrome
+function isPalindrome(str) {
+  // On retire les espaces et met en minuscule pour être plus robuste
+  let cleaned = str.toLowerCase().replace(/\s+/g, '');
+  let reversed = cleaned.split('').reverse().join('');
+  return cleaned === reversed;
+}
+
+console.log(isPalindrome("madam"));     // true
+console.log(isPalindrome("bob"));       // true
+console.log(isPalindrome("kayak"));     // true
+console.log(isPalindrome("hello"));     // false
+console.log(isPalindrome("A man a plan a canal Panama")); // true
+</pre>
+
+<h2>Exercise 4: Biggest Number</h2>
+<pre>
+// Retourne le plus grand nombre dans un tableau
+function biggestNumberInArray(arr) {
+  let max = 0;
+  for(let item of arr) {
+    if(typeof item === 'number' && item > max) {
+      max = item;
+    }
+  }
+  return max;
+}
+
+const array1 = [-1, 0, 3, 100, 99, 2, 99];
+const array2 = ['a', 3, 4, 2];
+const array3 = [];
+
+console.log(biggestNumberInArray(array1)); // 100
+console.log(biggestNumberInArray(array2)); // 4
+console.log(biggestNumberInArray(array3)); // 0
+</pre>
+
+<h2>Exercise 5: Unique Elements</h2>
+<pre>
+// Retourne un tableau avec éléments uniques uniquement
+function uniqueElements(arr) {
+  return [...new Set(arr)];
+}
+
+const list = [1, 2, 3, 3, 3, 3, 4, 5];
+const newList = uniqueElements(list);
+console.log(newList); // [1, 2, 3, 4, 5]
+</pre>
+
+<h2>Exercise 6: Calendar</h2>
+
+<div id="calendar-container"></div>
+
+<script>
+// Fonction pour créer un calendrier DOM
+function createCalendar(year, month) {
+  // Mois JS indexé à 0, donc on retire 1
+  let date = new Date(year, month - 1, 1);
+
+  // Crée la table
+  let table = document.createElement('table');
+
+  // En-tête avec jours de la semaine (lundi-dimanche)
+  let days = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
+  let thead = document.createElement('thead');
+  let trHead = document.createElement('tr');
+  for (let d of days) {
+    let th = document.createElement('th');
+    th.textContent = d;
+    trHead.appendChild(th);
+  }
+  thead.appendChild(trHead);
+  table.appendChild(thead);
+
+  // Corps du tableau
+  let tbody = document.createElement('tbody');
+
+  // Trouver le jour de la semaine du 1er du mois (lundi=0, dimanche=6)
+  // En JS dimanche=0, lundi=1 ... dimanche=0 donc on ajuste:
+  let dayOfWeek = date.getDay(); // 0=dimanche, 1=lundi ...
+  dayOfWeek = (dayOfWeek === 0) ? 6 : dayOfWeek - 1; // dimanche devient 6, lundi=0
+
+  // Remplir la 1ère ligne avec des cellules vides avant le 1er
+  let tr = document.createElement('tr');
+  for (let i = 0; i < dayOfWeek; i++) {
+    tr.appendChild(document.createElement('td'));
+  }
+
+  // Remplir les jours
+  while (date.getMonth() === month - 1) {
+    // Créer une cellule jour
+    let td = document.createElement('td');
+    td.textContent = date.getDate();
+    tr.appendChild(td);
+
+    // Si c’est dimanche (dernier jour de la semaine), créer nouvelle ligne
+    if (date.getDay() === 0) {
+      tbody.appendChild(tr);
+      tr = document.createElement('tr');
+    }
+    date.setDate(date.getDate() + 1);
+  }
+
+  // Si la dernière ligne n’est pas terminée, on la complète avec des td vides
+  while (tr.children.length < 7) {
+    tr.appendChild(document.createElement('td'));
+  }
+  tbody.appendChild(tr);
+
+  table.appendChild(tbody);
+
+  // Injecter dans la page
+  let container = document.getElementById('calendar-container');
+  container.innerHTML = ''; // vider si déjà présent
+  container.appendChild(table);
+}
+
+// Exemple d’utilisation :
+createCalendar(2012, 9);
+</script>
+
+</body>
+</html> -->
