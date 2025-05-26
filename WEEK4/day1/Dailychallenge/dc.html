@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Groceries Pass By Value & Reference Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      margin: 20px;
+      padding: 0;
+      color: #333;
+    }
+    h1 {
+      color: #2a7ae2;
+    }
+    section {
+      background: white;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+    .log {
+      background: #222;
+      color: #0f0;
+      font-family: monospace;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      max-width: 500px;
+      overflow-x: auto;
+    }
+    button {
+      background: #2a7ae2;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #1a5cc8;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Groceries Demo: Pass By Value & Reference</h1>
+
+  <section>
+    <h2>Fruits in Groceries</h2>
+    <ul id="fruitsList">
+      <!-- Fruits will be inserted here -->
+    </ul>
+    <button id="showFruitsBtn">Show Fruits in Console</button>
+  </section>
+
+  <section>
+    <h2>Clone Groceries Behavior</h2>
+    <button id="cloneBtn">Run cloneGroceries()</button>
+    <div class="log" id="logOutput">
+      <!-- Logs will appear here -->
+    </div>
+  </section>
+
+  <script>
+    let client = "John";
+
+    const groceries = {
+      fruits : ["pear", "apple", "banana"],
+      vegetables: ["tomatoes", "cucumber", "salad"],
+      totalPrice : "20$",
+      other : {
+        paid : true,
+        meansOfPayment : ["cash", "creditCard"]
+      }
+    };
+
+    // Display the fruits on the page inside the ul#fruitsList
+    const displayGroceries = () => {
+      const ul = document.getElementById('fruitsList');
+      ul.innerHTML = ''; // clear existing list
+      groceries.fruits.forEach(fruit => {
+        const li = document.createElement('li');
+        li.textContent = fruit;
+        ul.appendChild(li);
+      });
+    };
+
+    // Function to demonstrate pass by value and reference
+    const cloneGroceries = () => {
+      let output = '';
+
+      // user copies client (primitive)
+      let user = client;
+
+      // Change client and check user
+      client = "Betty";
+
+      output += `After changing client to "Betty":\n`;
+      output += `user: ${user}\n`;   // "John"
+      output += `client: ${client}\n\n`; // "Betty"
+
+      // shopping references groceries (object)
+      let shopping = groceries;
+
+      // Change totalPrice
+      shopping.totalPrice = "35$";
+      output += `After changing shopping.totalPrice to "35$":\n`;
+      output += `groceries.totalPrice: ${groceries.totalPrice}\n\n`; // "35$"
+
+      // Change paid
+      shopping.other.paid = false;
+      output += `After changing shopping.other.paid to false:\n`;
+      output += `groceries.other.paid: ${groceries.other.paid}\n`;
+
+      return output;
+    };
+
+    // Event listeners for buttons
+    document.getElementById('showFruitsBtn').addEventListener('click', () => {
+      console.clear();
+      console.log("Fruits in groceries:");
+      groceries.fruits.forEach(fruit => console.log(fruit));
+      alert('Check the console to see the fruits logged.');
+    });
+
+    document.getElementById('cloneBtn').addEventListener('click', () => {
+      const logDiv = document.getElementById('logOutput');
+      logDiv.textContent = cloneGroceries();
+    });
+
+    // Initialize fruits list on page load
+    displayGroceries();
+  </script>
+
+</body>
+</html>
