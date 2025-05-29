@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Quote Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(120deg, #fcb69f 0%, #a1c4fd 100%);
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      transition: background 0.4s, color 0.4s;
+    }
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px #7f53ac22;
+      padding: 2.5rem 2rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+    h1 {
+      text-align: center;
+      color: #7f53ac;
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+    .quote-section {
+      min-height: 140px;
+      margin: 1.5rem 0;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      background: linear-gradient(90deg, #e0e7ff 0%, #f7fafd 100%);
+      border-radius: 1.2rem;
+      text-align: center;
+      font-size: 1.4rem;
+      box-shadow: 0 2px 12px #7f53ac11;
+      position: relative;
+      transition: box-shadow 0.2s, background 0.4s, color 0.4s;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInQuote 0.6s forwards;
+    }
+    @keyframes fadeInQuote {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .quote-section::before {
+      content: '“';
+      font-size: 3.5rem;
+      color: #ff7e5f;
+      position: absolute;
+      left: 1.2rem;
+      top: 0.5rem;
+      opacity: 0.2;
+      font-family: serif;
+    }
+    .quote-section::after {
+      content: '”';
+      font-size: 3.5rem;
+      color: #ff7e5f;
+      position: absolute;
+      right: 1.2rem;
+      bottom: 0.5rem;
+      opacity: 0.2;
+      font-family: serif;
+    }
+    .author {
+      margin-top: 1.2rem;
+      color: #4f46e5;
+      font-weight: bold;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    .btn {
+      background: linear-gradient(90deg, #7f53ac, #647dee);
+      color: #fff;
+      border: none;
+      border-radius: 1.2rem;
+      padding: 0.8rem 1.7rem;
+      font-size: 1.08rem;
+      margin: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 8px #7f53ac22;
+      transition: background 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #647dee, #7f53ac);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .btn .icon {
+      font-size: 1.2em;
+      display: inline-block;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .like-count {
+      color: #ff7e5f;
+      font-weight: bold;
+      margin-left: 0.3rem;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    #likeBtn.liked .like-count {
+      animation: popLike 0.4s;
+    }
+    @keyframes popLike {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5) rotate(-10deg); }
+      100% { transform: scale(1); }
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin: 1.5rem 0;
+      background: #f7fafd;
+      border-radius: 1rem;
+      padding: 1.2rem 1rem;
+      box-shadow: 0 1px 4px #7f53ac11;
+    }
+    form h3 {
+      margin: 0 0 0.5rem 0;
+      color: #7f53ac;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    input, textarea {
+      padding: 0.7rem;
+      border-radius: 0.7rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      background: #fff;
+      transition: border 0.2s;
+    }
+    input:focus, textarea:focus {
+      border: 1.5px solid #7f53ac;
+      outline: none;
+    }
+    .filter-form {
+      margin: 2rem 0 1rem 0;
+      display: flex;
+      gap: 0.7rem;
+      justify-content: center;
+      background: none;
+      box-shadow: none;
+      padding: 0;
+    }
+    .filter-form input {
+      width: 180px;
+    }
+    .nav-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    @media (max-width: 700px) {
+      .container {
+        padding: 1.2rem 0.5rem;
+      }
+      .quote-section {
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+        font-size: 1.1rem;
+      }
+    }
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: linear-gradient(120deg, #232526 0%, #414345 100%);
+        color: #f3f4f6;
+      }
+      .container {
+        background: #23243a;
+        color: #f3f4f6;
+        box-shadow: 0 8px 32px #0008;
+      }
+      .quote-section {
+        background: linear-gradient(90deg, #23243a 0%, #2c2f4a 100%);
+        color: #f3f4f6;
+        box-shadow: 0 2px 12px #0005;
+      }
+      form {
+        background: #23243a;
+        color: #f3f4f6;
+      }
+      input, textarea {
+        background: #2c2f4a;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Random Quote Generator</h1>
+    <section class="quote-section" id="quoteSection">
+      <!-- Quote will appear here -->
+    </section>
+    <div class="actions">
+      <button class="btn" id="generateBtn"><span class="icon">🔄</span> Generate Quote</button>
+      <button class="btn" id="charWithSpacesBtn"><span class="icon">🔢</span> Chars (with spaces)</button>
+      <button class="btn" id="charNoSpacesBtn"><span class="icon">🔢</span> Chars (no spaces)</button>
+      <button class="btn" id="wordCountBtn"><span class="icon">📝</span> Word Count</button>
+      <button class="btn" id="likeBtn"><span class="icon">❤️</span> Like <span class="like-count" id="likeCount">0</span></button>
+    </div>
+    <form id="addQuoteForm">
+      <h3>Add a new quote</h3>
+      <textarea id="newQuoteText" placeholder="Quote" required></textarea>
+      <input type="text" id="newQuoteAuthor" placeholder="Author" required />
+      <button class="btn" type="submit">Add Quote</button>
+    </form>
+    <form class="filter-form" id="filterForm">
+      <input type="text" id="filterAuthor" placeholder="Filter by author" />
+      <button class="btn" type="submit">Filter</button>
+    </form>
+    <div class="nav-btns" id="navBtns" style="display:none;">
+      <button class="btn" id="prevBtn">Previous</button>
+      <button class="btn" id="nextBtn">Next</button>
+    </div>
+  </div>
+  <script src="random-quote-generator.js"></script>
+</body>
+</html> 
