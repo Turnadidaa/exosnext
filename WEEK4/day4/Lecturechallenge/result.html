@@ -1,0 +1,29 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Result Page</title>
+</head>
+<body>
+  <h1>Données reçues :</h1>
+  <section id="output"></section>
+
+  <script>
+    // Fonction pour obtenir les paramètres de l'URL
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        name: params.get("name"),
+        lastname: params.get("lastname")
+      };
+    }
+
+    // Récupérer les données et les afficher dans la section
+    const data = getQueryParams();
+    const outputSection = document.getElementById("output");
+
+    outputSection.textContent = JSON.stringify(data, null, 2); // format JSON lisible
+  </script>
+</body>
+</html>

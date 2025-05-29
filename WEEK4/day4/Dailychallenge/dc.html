@@ -1,0 +1,45 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form to JSON</title>
+</head>
+<body>
+
+  <h1>🌟 Formulaire → JSON</h1>
+
+  <form id="myForm">
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="firstname" required><br><br>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname" required><br><br>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <h2>📦 Résultat JSON :</h2>
+  <pre id="result"></pre>
+
+  <script>
+    const form = document.getElementById('myForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêche le rechargement de la page
+
+      const firstName = document.getElementById('firstname').value;
+      const lastName = document.getElementById('lastname').value;
+
+      const data = {
+        firstName: firstName,
+        lastName: lastName
+      };
+
+      const jsonString = JSON.stringify(data, null, 2); // pretty print
+      resultDiv.textContent = jsonString; // Affiche dans le <pre>
+    });
+  </script>
+
+</body>
+</html> -->
