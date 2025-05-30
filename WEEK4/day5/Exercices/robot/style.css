@@ -1,0 +1,262 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    color: #f1f5f9;
+    text-align: center;
+    margin: 0;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    background-color: #0f172a;
+}
+
+.hero-header {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+.header-content h1, .header-content p {
+    text-shadow: none;
+}
+
+.header-subtitle {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: #00fffc;
+    text-shadow: 0 0 10px rgba(0, 255, 252, 0.5);
+}
+
+.main-background {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+}
+
+.glitch {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                 0.025em 0.04em 0 #fffc00;
+    animation: glitch 725ms infinite;
+}
+
+.glitch span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.search-container {
+    position: relative;
+    display: inline-block;
+    margin: 2rem 0;
+}
+
+#search {
+    padding: 1rem 3rem 1rem 1.5rem;
+    width: 300px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+#search:focus {
+    outline: none;
+    border-color: #00fffc;
+    box-shadow: 0 0 20px rgba(0, 255, 252, 0.3);
+    width: 350px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00fffc;
+    pointer-events: none;
+}
+
+#robot-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+    position: relative;
+    min-height: 500px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.robot-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.7;
+}
+
+.card {
+    background: rgba(30, 41, 59, 0.9);
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 250px;
+    box-shadow: 0 0 20px rgba(0, 255, 252, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    backdrop-filter: blur(5px);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(0, 255, 252, 0.3);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 252, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 50%;
+    border: 3px solid #00fffc;
+    transition: all 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 252, 0.5);
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    margin: 1rem 0;
+    color: #00fffc;
+}
+
+.card p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #94a3b8;
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                     0.025em 0.04em 0 #fffc00;
+    }
+    15% {
+        text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                     0.025em 0.04em 0 #fffc00;
+    }
+    16% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                     -0.05em -0.05em 0 #fffc00;
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                     -0.05em -0.05em 0 #fffc00;
+    }
+    50% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                     0 -0.04em 0 #fffc00;
+    }
+    99% {
+        text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                     0 -0.04em 0 #fffc00;
+    }
+    100% {
+        text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+                     -0.04em -0.025em 0 #fffc00;
+    }
+}
+
+/* Hide the Spline badge */
+spline-viewer::part(branding) {
+  display: none !important;
+}
+
+/* Fallback for older Spline versions or if ::part doesn't work */
+.spline-viewer__branding,
+[style*="Built with Spline"] {
+  display: none !important;
+}
+  

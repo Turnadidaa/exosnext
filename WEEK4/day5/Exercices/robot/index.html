@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Robo-Friends Search</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="hero-header">
+    <video autoplay muted loop class="header-video">
+      <source src="\WEEK4\day5\Exercices\static\backgroundh-video.mp4" type="video/mp4">
+    </video>
+    <div class="header-content">
+      <h1 class="glitch" data-text="🤖 Robo-Friends">🤖 Robo-Friends</h1>
+      <p class="header-subtitle">Discover the Future of Robotics</p>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search robots..." />
+      <div class="search-icon">🔍</div>
+    </div>
+    <div id="robot-container">
+      <video autoplay muted loop playsinline class="robot-background">
+        <source src="\WEEK4\day5\Exercices\robot\static\background2.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <script src="robots.js"></script>
+  <script src="app.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.98/build/spline-viewer.js"></script>
+  <spline-viewer url="https://prod.spline.design/lj3fwMJA7SdSx4Bd/scene.splinecode"></spline-viewer>
+</body>
+</html>
