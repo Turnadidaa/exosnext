@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Giphy Random Search</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      /* background vidéo gérée par balise <video> */
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 0 0 0;
+      position: relative;
+    }
+    h1 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+      text-shadow:
+        0 0 8px #00fff7,
+        0 0 16px #ff00ea,
+        0 0 32px #00fff7;
+      filter: brightness(1.2);
+      transition: color 0.3s;
+    }
+    .console-container {
+      position: relative;
+      width: 370px;
+      max-width: 90vw;
+      margin: 0 auto 30px auto;
+      z-index: 1;
+      box-shadow: 0 0 40px 10px #00fff766, 0 0 80px 20px #ff00ea33;
+    }
+    .console-img {
+      width: 100%;
+      display: block;
+      border-radius: 24px;
+      box-shadow: 0 0 32px 8px #00fff799, 0 0 64px 16px #ff00ea55;
+    }
+    .screen-gif {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 210px;
+      height: 210px;
+      transform: translate(-50%, -50%) translateY(-22px);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #181a2b;
+      box-shadow:
+        0 0 0 4px #00fff7,
+        0 0 0 8px #ff00ea,
+        0 0 32px 8px #00fff7cc,
+        0 0 64px 16px #ff00ea99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid #00fff7;
+      image-rendering: pixelated;
+      animation: popin 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .screen-gif img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #181a2b;
+      box-shadow: 0 0 0 2px #00fff7, 0 0 16px 4px #ff00ea99;
+      image-rendering: pixelated;
+      animation: fadein 0.7s;
+    }
+    @keyframes popin {
+      0% { transform: scale(0.7) translate(-50%, -50%) translateY(-20px); opacity: 0; }
+      80% { transform: scale(1.1) translate(-50%, -50%) translateY(-20px); opacity: 1; }
+      100% { transform: scale(1) translate(-50%, -50%) translateY(-20px); opacity: 1; }
+    }
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    form {
+      margin: 0 auto 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      background: #181a2bcc;
+      border-radius: 12px;
+      box-shadow: 0 0 16px 2px #00fff799, 0 0 32px 4px #ff00ea55;
+      padding: 18px 20px;
+      font-size: 1rem;
+    }
+    input {
+      font-family: 'Press Start 2P', cursive;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid #00fff7;
+      background: #23234d;
+      color: #00fff7;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input:focus {
+      border: 2px solid #ff00ea;
+      box-shadow: 0 0 8px #ff00ea, 0 0 16px #00fff7;
+    }
+    button {
+      font-family: 'Press Start 2P', cursive;
+      background: linear-gradient(90deg, #00fff7 0%, #ff00ea 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00fff7, 0 0 16px #ff00ea;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      text-shadow: 0 0 8px #00fff7, 0 0 16px #ff00ea;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ff00ea 0%, #00fff7 100%);
+      color: #fff;
+      box-shadow: 0 0 16px #ff00ea, 0 0 32px #00fff7;
+    }
+    #delete-all {
+      background: linear-gradient(90deg, #ff00ea 0%, #00fff7 100%);
+      color: #fff;
+      margin: 0 auto 30px auto;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 1rem;
+      font-family: 'Press Start 2P', cursive;
+      box-shadow: 0 0 8px #ff00ea, 0 0 16px #00fff7;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    #delete-all:hover {
+      background: linear-gradient(90deg, #00fff7 0%, #ff00ea 100%);
+      color: #fff;
+      box-shadow: 0 0 16px #00fff7, 0 0 32px #ff00ea;
+    }
+    @media (max-width: 500px) {
+      .console-container {
+        width: 98vw;
+      }
+      .screen-gif {
+        width: 55vw;
+        height: 55vw;
+        min-width: 120px;
+        min-height: 120px;
+        max-width: 210px;
+        max-height: 210px;
+      }
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(120deg,rgba(10,10,30,0.5),rgba(30,0,40,0.5));
+      z-index: -1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="background-video" playsinline style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-2;"><source src="static/background5.mp4" type="video/mp4"></video>
+  <div class="overlay"></div>
+  <h1>🎮 Giphy Pixel Console</h1>
+  <div class="console-container">
+   <img src="static/console-pixel.png" alt="Pixel Console" class="console-img">
+
+    <div class="screen-gif" id="screen-gif"></div>
+  </div>
+  <form id="gif-form">
+    <input type="text" id="search-input" placeholder="Enter category..." required>
+    <button type="submit">Search</button>
+  </form>
+  <button id="delete-all">Delete All GIFs</button>
+  <script src="script.js"></script>
+  <script>
+    // Place le GIF dans l'écran de la console
+    function displayGifInConsole(gifUrl) {
+      const screen = document.getElementById('screen-gif');
+      screen.innerHTML = `<img src="${gifUrl}" alt="GIF">`;
+    }
+    // Pour l'intégration avec le script existant, il faudra appeler displayGifInConsole(url) à chaque recherche.
+  </script>
+</body>
+</html>
