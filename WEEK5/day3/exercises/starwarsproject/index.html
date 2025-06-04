@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galactic Database</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="video-background">
+    <video autoplay muted loop id="myVideo">
+      <source src="static/background1.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="theme-toggle">
+    <input type="checkbox" id="theme-switch" class="theme-switch">
+    <label for="theme-switch" class="theme-label">
+      <i class="fas fa-sun"></i>
+      <i class="fas fa-moon"></i>
+    </label>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1 class="logo">
+        <span class="logo-text">Galactic Database</span>
+        <div class="logo-decoration"></div>
+      </h1>
+    </header>
+
+    <div class="button-container">
+      <button id="get-character" class="glow-button">
+        <i class="fas fa-rocket"></i>
+        <span>Discover a Random Character</span>
+      </button>
+      <button id="show-image" class="glow-button">
+        <i class="fas fa-image"></i>
+        <span>Show Character Image</span>
+      </button>
+    </div>
+
+    <div id="character-image" class="character-image hidden">
+      <img src="static/charactere.png" alt="Character Image" class="character-img">
+    </div>
+
+    <div id="loading" class="loading-container hidden">
+      <div class="hologram-loader">
+        <i class="fas fa-jedi"></i>
+        <p>Fetching a hero from the galaxy...</p>
+        <div class="loading-bar">
+          <div class="loading-progress"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="character-info" class="character-card hidden">
+      <button class="close-button">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="card-content">
+        <h2 id="name" class="character-name"></h2>
+        <div class="character-details">
+          <div class="detail-item">
+            <i class="fas fa-ruler"></i>
+            <p><strong>Height:</strong> <span id="height"></span></p>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-venus-mars"></i>
+            <p><strong>Gender:</strong> <span id="gender"></span></p>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-calendar"></i>
+            <p><strong>Birth Year:</strong> <span id="birth-year"></span></p>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-globe"></i>
+            <p><strong>Homeworld:</strong> <span id="home-world"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="error-message" class="error hidden">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span>Failed to fetch character data. Please try again!</span>
+    </div>
+  </div>
+  <script src="particles.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
