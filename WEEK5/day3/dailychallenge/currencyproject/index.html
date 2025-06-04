@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nada's Currency Converter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="welcome-container">
+    <video class="welcome-bg-video" src="static/backcurren.mp4" autoplay loop muted playsinline></video>
+    <div class="welcome-content">
+      <h1 class="welcome-title">Welcome to Nada's Currency Converter</h1>
+      <p class="welcome-subtitle">Convert currencies with ease and precision</p>
+      <button class="start-button" onclick="showConverter()">Start Converting</button>
+    </div>
+  </div>
+
+  <div class="converter-container">
+    <div class="form-container">
+      <button class="close-button" onclick="hideConverter()">×</button>
+      <h1>Currency Converter</h1>
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter amount" />
+
+      <label for="fromCurrency">From:</label>
+      <select id="fromCurrency">
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="JPY">JPY - Japanese Yen</option>
+        <option value="CAD">CAD - Canadian Dollar</option>
+      </select>
+
+      <button id="switchBtn" onclick="switchCurrencies()">⇄ Switch</button>
+
+      <label for="toCurrency">To:</label>
+      <select id="toCurrency">
+        <option value="EUR">EUR - Euro</option>
+        <option value="USD">USD - US Dollar</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="JPY">JPY - Japanese Yen</option>
+        <option value="CAD">CAD - Canadian Dollar</option>
+      </select>
+
+      <button onclick="convertCurrency()">Convert</button>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    function showConverter() {
+      document.querySelector('.welcome-container').style.display = 'none';
+      document.querySelector('.converter-container').classList.add('active');
+    }
+
+    function hideConverter() {
+      document.querySelector('.converter-container').classList.remove('active');
+      document.querySelector('.welcome-container').style.display = 'flex';
+    }
+
+    function switchCurrencies() {
+      const fromCurrency = document.getElementById('fromCurrency');
+      const toCurrency = document.getElementById('toCurrency');
+      const temp = fromCurrency.value;
+      fromCurrency.value = toCurrency.value;
+      toCurrency.value = temp;
+    }
+
+    function convertCurrency() {
+      const amount = document.getElementById('amount').value;
+      const fromCurrency = document.getElementById('fromCurrency').value;
+      const toCurrency = document.getElementById('toCurrency').value;
+      
+      // Ici, vous devrez implémenter la logique de conversion réelle
+      // Pour l'instant, nous allons simuler une conversion
+      const result = (amount * 1.1).toFixed(2); // Simulation simple
+      document.getElementById('result').innerHTML = 
+        `${amount} ${fromCurrency} = ${result} ${toCurrency}`;
+    }
+  </script>
+</body>
+</html>

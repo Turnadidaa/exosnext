@@ -1,0 +1,323 @@
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes shine {
+    0% { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    max-width: none;
+}
+
+body {
+    width: 100vw;
+    min-width: 100vw;
+    min-height: 100vh;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: none;
+    color: #2c3e50;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.welcome-container {
+    min-height: 100vh;
+    min-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+    position: relative;
+    overflow: hidden;
+    background: none;
+}
+
+.welcome-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+    filter: blur(2px) brightness(0.6);
+    pointer-events: none;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.welcome-title {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 0 #222;
+    animation: float 6s ease-in-out infinite;
+    letter-spacing: 2px;
+}
+
+.welcome-subtitle {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1.5rem;
+    color: #e0e7ef;
+    margin-bottom: 3rem;
+    animation: fadeIn 1.5s ease-out;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    font-weight: 400;
+}
+
+.start-button {
+    font-family: 'Poppins', Arial, sans-serif;
+    padding: 18px 48px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(90deg, #005bea 0%, #3ec6e0 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
+    animation: pulse 2s infinite;
+    box-shadow: 0 10px 32px rgba(0,91,234,0.18);
+    letter-spacing: 1px;
+    z-index: 1000;
+    max-width: 30vw;
+    min-width: 100px;
+}
+
+@media (max-width: 600px) {
+  .start-button {
+    padding: 14px 24px;
+    font-size: 1rem;
+    bottom: 20px;
+    min-width: 120px;
+    left: 20px;
+  }
+}
+
+.start-button:hover {
+    background: linear-gradient(90deg, #3ec6e0 0%, #005bea 100%);
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 40px rgba(0,91,234,0.25);
+}
+
+.start-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shine 3s infinite;
+}
+
+.converter-container {
+    display: none;
+    animation: fadeIn 0.8s ease-out;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.converter-container.active {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1a365d;
+    font-size: 28px;
+    font-weight: 600;
+    animation: fadeIn 0.8s ease-out;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 500;
+    color: #4a5568;
+    font-size: 14px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+select,
+input {
+    padding: 12px 15px;
+    margin-top: 8px;
+    width: 100%;
+    font-size: 15px;
+    box-sizing: border-box;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+select:focus,
+input:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    transform: translateY(-2px);
+}
+
+button {
+    cursor: pointer;
+    padding: 12px 20px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button:not(#switchBtn) {
+    background: linear-gradient(45deg, #2b6cb0, #4299e1);
+    color: white;
+}
+
+button:not(#switchBtn):hover {
+    background: linear-gradient(45deg, #2c5282, #2b6cb0);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(43, 108, 176, 0.2);
+}
+
+#switchBtn {
+    background: linear-gradient(45deg, #718096, #a0aec0);
+    color: white;
+}
+
+#switchBtn:hover {
+    background: linear-gradient(45deg, #4a5568, #718096);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(113, 128, 150, 0.2);
+}
+
+#result {
+    font-weight: 600;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 20px;
+    color: #2d3748;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease-out, pulse 2s infinite;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Effet de brillance sur les boutons */
+button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: 0.5s;
+}
+
+button:hover::after {
+    left: 100%;
+}
+
+/* Ajout d'un conteneur pour le formulaire */
+.form-container {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s ease-out;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.close-button {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b6b, #ff8787);
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.2);
+    z-index: 10;
+}
+
+.close-button:hover {
+    transform: rotate(90deg);
+    background: linear-gradient(45deg, #ff5252, #ff6b6b);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+  
