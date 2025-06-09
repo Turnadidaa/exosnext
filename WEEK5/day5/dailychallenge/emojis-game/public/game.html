@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emoji Guess Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body class="game-page">
+  <div class="arcade-container">
+    <div class="arcade-screen">
+      <div class="game-container">
+        
+        <div class="game-header-bar">
+          <div class="top-left-panel">
+            <div class="difficulty-buttons">
+              <button class="difficulty-btn active" data-difficulty="easy">easy</button>
+              <button class="difficulty-btn" data-difficulty="medium">medium</button>
+              <button class="difficulty-btn" data-difficulty="hard">hard</button>
+            </div>
+          </div>
+
+          <div class="timer">00:00</div>
+
+          <div class="top-right-panel">
+            <div class="player-info">
+              <i class="fas fa-user"></i>
+              <span id="player-name">Player</span>
+            </div>
+            <button id="hint-btn" class="hint-btn">
+              <i class="fas fa-lightbulb"></i> Hint
+            </button>
+          </div>
+        </div>
+
+        <div class="bottom-right-panel">
+          <div class="score-display">
+            SCORE <span id="score">00</span>
+          </div>
+        </div>
+
+        <div class="emoji-container">
+          <div id="emoji" class="emoji"></div>
+        </div>
+        <div class="options-container">
+          <div id="options" class="options"></div>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        
+      </div>
+    </div>
+    <div class="arcade-controls">
+      <button class="control-btn" onclick="window.location.href='index.html'">
+        <i class="fas fa-home"></i> Home
+      </button>
+      <button class="control-btn" onclick="resetGame()">
+        <i class="fas fa-redo"></i> Reset
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Display player name from localStorage
+    const playerName = localStorage.getItem('playerName') || 'Player';
+    document.getElementById('player-name').textContent = playerName;
+  </script>
+</body>
+</html> 
