@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"> <!-- Using Poppins for general text -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: url('bg1.png'); /* Your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #fafafa; /* Fallback background color */
+            color: #262626;
+            overflow: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px; /* Even bigger max-width for overall form size */
+            margin: 0 auto;
+            padding: 30px; /* Increased padding for the container */
+            box-sizing: border-box;
+        }
+
+        .auth-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .login-box,
+        .signup-box {
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-radius: 10px; /* Slightly more rounded corners */
+            padding: 50px; /* Significantly increased padding */
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px; /* Increased margin */
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* Stronger subtle shadow */
+        }
+
+        h2.main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px; /* Even bigger font size */
+            font-weight: 700;
+            margin-bottom: 40px; /* More space below title */
+            color: #262626;
+        }
+
+        .form-group {
+            margin-bottom: 20px; /* Increased margin for inputs */
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 12px; /* Significantly increased padding */
+            background-color: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 6px; /* Slightly more rounded */
+            box-sizing: border-box;
+            font-size: 18px; /* Even bigger font size */
+            color: #262626;
+            transition: border-color 0.1s ease;
+        }
+
+        input::placeholder {
+            color: #8e8e8e;
+        }
+
+        input:focus {
+            border-color: #b3b3b3;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px 0; /* Significantly increased padding */
+            background-color: #0095f6;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px; /* Slightly more rounded */
+            cursor: pointer;
+            font-size: 18px; /* Even bigger font size */
+            font-weight: 600;
+            margin-top: 20px; /* Increased margin-top */
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #0077d6;
+        }
+
+        button:disabled {
+            background-color: #b2dffc;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .or-separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0; /* Increased margin */
+            color: #8e8e8e;
+            font-weight: 600;
+            font-size: 14px; /* Increased font size */
+            text-transform: uppercase;
+        }
+
+        .or-separator::before,
+        .or-separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        .or-separator:not(:empty)::before {
+            margin-right: .25em;
+        }
+
+        .or-separator:not(:empty)::after {
+            margin-left: .25em;
+        }
+
+        .forgot-password {
+            font-size: 15px; /* Bigger font size */
+            margin-top: 25px; /* Increased margin-top */
+        }
+
+        .forgot-password a {
+            color: #00376b;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-box p {
+            color: #262626;
+            font-size: 18px; /* Bigger font size */
+        }
+
+        .signup-box a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-box a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            margin-top: 25px; /* Increased margin-top */
+            padding: 15px; /* Increased padding */
+            border-radius: 6px;
+            text-align: center;
+            font-size: 18px; /* Bigger font size */
+        }
+
+        .success {
+            background-color: #e6ffed;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #ffebe8;
+            color: #ea394f;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Hide labels as per Instagram style */
+        label {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="auth-section">
+            <div class="login-box">
+                <h2 class="main-title">Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="username" name="username" placeholder="Phone number, username, or email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" id="submitBtn" disabled>Log In</button>
+                </form>
+                <div class="or-separator">OR</div>
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            <div class="signup-box">
+                <p>Don't have an account? <a href="register.html">Sign up</a></p>
+            </div>
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const messageDiv = document.getElementById('message');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        const checkInputs = () => {
+            submitBtn.disabled = !usernameInput.value || !passwordInput.value;
+        };
+        
+        usernameInput.addEventListener('input', checkInputs);
+        passwordInput.addEventListener('input', checkInputs);
+
+        checkInputs();
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.className = 'message success';
+                    messageDiv.textContent = data.message;
+                } else {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = data.error;
+                }
+            } catch (error) {
+                console.error('Login fetch error:', error);
+                messageDiv.className = 'message error';
+                messageDiv.textContent = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html> 
