@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Connexion utilisateur</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      border: 1.5px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+    input:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 600;
+      color: #28a745; /* vert */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Connexion</h1>
+    <form id="loginForm">
+      <input type="text" name="username" placeholder="Nom d'utilisateur" required />
+      <input type="password" name="password" placeholder="Mot de passe" required />
+      <button type="submit">Se connecter</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const msg = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        msg.style.color = response.ok ? '#28a745' : 'red';
+        msg.innerText = result.message || 'Erreur';
+      } catch (err) {
+        msg.style.color = 'red';
+        msg.innerText = 'Erreur serveur';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
