@@ -1,0 +1,336 @@
+body {
+    font-family: 'Roboto Mono', monospace; /* A more stark, monospace font for general text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1a1a1a; /* Very dark background */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative; /* Needed for z-index context */
+}
+
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    background-size: cover;
+    background-color: #1a1a1a; /* Fallback for video not loading */
+    opacity: 0.5; /* Slightly transparent to let content stand out */
+}
+
+.deathnote-container {
+    background-color: rgba(13, 13, 13, 0.85); /* Slightly transparent background for readability over video */
+    background-image: url('/background1.png');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7); /* Intense shadow for depth */
+    padding: 40px;
+    width: 100%;
+    max-width: 900px; /* Adjusted max-width for wider planner look */
+    border: 1px solid #333; /* Subtle border */
+    box-sizing: border-box;
+    position: relative;
+    color: #e0e0e0; /* Light text for contrast */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.deathnote-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.deathnote-header h1 {
+    font-family: 'Metal Mania', cursive;
+    color: #e0e0e0;
+    font-size: 5em; /* Increased font size */
+    margin: 0 0 10px 0;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.deathnote-header h2 {
+    font-family: 'Cinzel', serif;
+    color: #a0a0a0; /* Slightly faded secondary title */
+    font-size: 1.2em;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.deathnote-content {
+    display: flex;
+    gap: 30px; /* Space between schedule and right panel */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.schedule-section,
+.right-panel {
+    background-color: #151515; /* Slightly lighter than container for sections */
+    border-radius: 5px;
+    padding: 25px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+    box-sizing: border-box;
+}
+
+.schedule-section {
+    flex: 2; /* Takes more space */
+    min-width: 300px; /* Minimum width for schedule */
+}
+
+.right-panel {
+    flex: 1; /* Takes remaining space */
+    min-width: 280px; /* Minimum width for right panel */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h2 {
+    font-family: 'Cinzel', serif;
+    color: #e0e0e0;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.schedule-times p {
+    margin: 12px 0;
+    color: #a0a0a0;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+}
+
+.schedule-times .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333; /* Subtle line */
+    margin-left: 10px;
+}
+
+.schedule-times .schedule-input {
+    flex-grow: 1;
+    background-color: #111; /* Dark background */
+    border: 1px solid #333; /* Subtle border */
+    color: #e0e0e0; /* Light text */
+    padding: 5px 8px;
+    border-radius: 3px;
+    margin-left: 10px;
+    font-size: 0.9em;
+    outline: none;
+}
+
+.task-list-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#tasks-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #222; 
+    color: #e0e0e0;
+    font-size: 1em;
+    position: relative;
+}
+
+#tasks-list li:last-child {
+    border-bottom: none;
+}
+
+/* Remove chalkboard numbering */
+#tasks-list li::before {
+    content: none;
+}
+
+#tasks-list li input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #888; 
+    background-color: #333;
+    cursor: pointer;
+    margin-right: 15px;
+    position: relative;
+    flex-shrink: 0;
+    border-radius: 2px;
+}
+
+#tasks-list li input[type="checkbox"]:checked {
+    background-color: #c00; 
+    border-color: #c00;
+}
+
+#tasks-list li input[type="checkbox"]:checked::after {
+    content: '\2713'; 
+    display: block;
+    color: #fff; 
+    font-size: 14px;
+    text-align: center;
+    line-height: 18px;
+}
+
+#tasks-list li span {
+    flex-grow: 1;
+    white-space: normal; /* Allow text to wrap for tasks */
+    word-wrap: break-word;
+}
+
+#tasks-list li input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: #888; 
+}
+
+.delete-task {
+    background-color: transparent;
+    border: 1px solid #555;
+    color: #888;
+    padding: 4px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-left: 10px;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.delete-task:hover {
+    opacity: 1;
+    color: #e0e0e0;
+    border-color: #e0e0e0;
+}
+
+.new-task-input {
+    display: flex;
+    margin-top: 20px;
+    border-top: none;
+    padding-top: 0;
+    border: 1px solid white;
+    border-radius: 3px;
+    overflow: hidden;
+    align-items: stretch; /* Ensure children stretch to fill height */
+}
+
+.new-task-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    background-color: #111;
+    color: #e0e0e0;
+    font-size: 0.95em;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.new-task-input input::placeholder {
+    color: #666;
+}
+
+.new-task-input input:focus {
+    border-color: #aaa;
+}
+
+.new-task-input button {
+    background-color: #c00;
+    color: white;
+    border: none;
+    padding: 10px 30px; /* Significantly increased horizontal padding for diagnosis */
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 0;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+    min-width: 60px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.new-task-input button:hover {
+    background-color: #e00; 
+}
+
+.meals-section p,
+.mood-section input,
+.notes-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 3px;
+    background-color: #111;
+    color: #e0e0e0;
+    box-sizing: border-box;
+    margin-top: 10px;
+    font-size: 0.95em;
+}
+
+.meals-section p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.meals-section p input {
+    flex-grow: 1;
+    margin-top: 0; /* Override default input margin-top */
+}
+
+.water-intake {
+    text-align: center;
+}
+
+.water-cups-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.water-cup {
+    width: 35px;
+    height: 45px;
+    border: 1px solid #555;
+    border-radius: 0 0 10px 10px;
+    background-color: #222;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.water-cup[data-filled="true"] {
+    background-color: #c00; /* Filled with red */
+    border-color: #e00;
+}
+
+.notes-section textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#tasks-list li.no-tasks-message {
+    justify-content: center;
+    font-style: italic;
+    color: #888;
+    border-bottom: none;
+    padding: 20px 0;
+} 

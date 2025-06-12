@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Note Task List</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto+Mono:wght@400;700&family=Metal+Mania&display=swap" rel="stylesheet">
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="/Death.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="deathnote-container">
+        <header class="deathnote-header">
+            <h1>DEATH NOTE</h1>
+            <h2>TASK LIST</h2>
+        </header>
+        
+        <main class="deathnote-content">
+            <section class="schedule-section">
+                <h2>SCHEDULE</h2>
+                <div class="schedule-times">
+                    <p>06:00 <input type="text" class="schedule-input"></p>
+                    <p>07:00 <input type="text" class="schedule-input"></p>
+                    <p>08:00 <input type="text" class="schedule-input"></p>
+                    <p>09:00 <input type="text" class="schedule-input"></p>
+                    <p>10:00 <input type="text" class="schedule-input"></p>
+                    <p>11:00 <input type="text" class="schedule-input"></p>
+                    <p>12:00 <input type="text" class="schedule-input"></p>
+                    <p>13:00 <input type="text" class="schedule-input"></p>
+                    <p>14:00 <input type="text" class="schedule-input"></p>
+                    <p>15:00 <input type="text" class="schedule-input"></p>
+                    <p>16:00 <input type="text" class="schedule-input"></p>
+                    <p>17:00 <input type="text" class="schedule-input"></p>
+                    <p>18:00 <input type="text" class="schedule-input"></p>
+                    <p>19:00 <input type="text" class="schedule-input"></p>
+                    <p>20:00 <input type="text" class="schedule-input"></p>
+                    <p>21:00 <input type="text" class="schedule-input"></p>
+                </div>
+            </section>
+            
+            <section class="right-panel">
+                <div class="task-list-section">
+                    <ul id="tasks-list">
+                        <!-- Tasks will be loaded here by JavaScript -->
+                    </ul>
+                    <div class="new-task-input">
+                        <input type="text" id="new-task-title" placeholder="Enter a new task...">
+                        <button id="add-task-button">ADD</button>
+                    </div>
+                </div>
+                
+                <div class="meals-section">
+                    <h2>MEALS</h2>
+                    <p>B <input type="text"></p>
+                    <p>L <input type="text"></p>
+                    <p>D <input type="text"></p>
+                </div>
+
+                <div class="water-intake">
+                    <h2>WATER INTAKE</h2>
+                    <div class="water-cups-container">
+                        <div class="water-cup" data-filled="false"></div>
+                        <div class="water-cup" data-filled="false"></div>
+                        <div class="water-cup" data-filled="false"></div>
+                        <div class="water-cup" data-filled="false"></div>
+                        <div class="water-cup" data-filled="false"></div>
+                        <div class="water-cup" data-filled="false"></div>
+                        <div class="water-cup" data-filled="false"></div>
+                        <div class="water-cup" data-filled="false"></div>
+                    </div>
+                </div>
+
+                <div class="mood-section">
+                    <h2>MOOD</h2>
+                    <input type="text" placeholder="How are you feeling...">
+                </div>
+
+                <div class="notes-section">
+                    <h2>NOTES</h2>
+                    <textarea placeholder="Write your notes here..."></textarea>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html> 
