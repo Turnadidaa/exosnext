@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire Emoji</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Choisis ton emoji !</h1>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <form action="/greet" method="POST">
+      <input type="text" name="name" placeholder="Entre ton prénom">
+      <select name="emoji">
+        <% emojis.forEach(e => { %>
+          <option value="<%= e %>"><%= e %></option>
+        <% }) %>
+      </select>
+      <button type="submit">Saluer !</button>
+    </form>
+  </div>
+</body>
+</html>
