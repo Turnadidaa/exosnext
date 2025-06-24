@@ -1,0 +1,21 @@
+{
+  "SocialMedias": [
+    { "name": "Facebook", "url": "https://facebook.com" },
+    { "name": "Twitter", "url": "https://twitter.com" },
+    { "name": "Instagram", "url": "https://instagram.com" }
+  ],
+  "Skills": {
+    "Frontend": ["HTML", "CSS", "JavaScript", "React"],
+    "Backend": ["Node.js", "Express", "MongoDB"]
+  },
+  "Experiences": [
+    {
+      "company": "Tech Corp",
+      "roles": ["Frontend Developer", "React Developer"]
+    },
+    {
+      "company": "CodeWorks",
+      "roles": ["Backend Developer", "API Designer"]
+    }
+  ]
+}
